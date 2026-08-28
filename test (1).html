@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BeeWork Hogar — Test</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --terracota:#C1642F; --terracota-d:#A54F22; --arena:#EFE4D3; --arena-osc:#E4D2B8;
+    --musgo:#8A7A5C; --cafe:#5C4A3A; --card:#FFFDF8; --text:#4A3A2C; --text-dim:#8A7A5C;
+    --line:rgba(92,74,58,0.16);
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{background:var(--arena);color:var(--text);font-family:'Poppins',sans-serif;line-height:1.6;}
+  .wrap{max-width:680px;margin:0 auto;padding:0 20px 70px;}
+  header{background:var(--card);padding:22px 0;border-bottom:2px solid var(--terracota);margin-bottom:26px;}
+  .header-row{max-width:680px;margin:0 auto;padding:0 20px;display:flex;align-items:center;gap:12px;}
+  .header-row svg{width:36px;}
+  .brand-word{display:flex;flex-direction:column;line-height:1.1;}
+  .brand-be{font-weight:700;font-size:14px;letter-spacing:1.5px;color:var(--terracota);}
+  .brand-ho{font-weight:600;font-size:9px;letter-spacing:2.5px;color:var(--cafe);}
+
+  .intro-card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:24px 22px;margin-bottom:24px;}
+  .intro-card h1{font-size:19px;color:var(--cafe);margin-bottom:10px;}
+  .intro-card p{font-size:14px;color:var(--text);margin-bottom:8px;}
+
+  .field{display:flex;flex-direction:column;gap:6px;margin-bottom:16px;}
+  label{font-size:13px;font-weight:600;color:var(--cafe);}
+  input[type=text],input[type=number],select{
+    font-family:'Poppins',sans-serif;font-size:14.5px;color:var(--text);
+    background:var(--card);border:1px solid var(--line);border-radius:10px;padding:11px 13px;width:100%;
+  }
+
+  .progress{position:sticky;top:0;background:var(--arena);padding:10px 0;z-index:10;font-size:12px;color:var(--text-dim);}
+  .bar{height:6px;background:var(--arena-osc);border-radius:99px;overflow:hidden;margin-top:4px;}
+  .bar-fill{height:100%;background:var(--terracota);width:0%;transition:width .2s ease;}
+
+  .q-block{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px 20px;margin-bottom:12px;}
+  .q-text{font-size:14.5px;color:var(--text);margin-bottom:12px;}
+  .likert{display:flex;justify-content:space-between;gap:6px;}
+  .likert label{display:flex;flex-direction:column;align-items:center;gap:6px;font-size:10.5px;font-weight:400;color:var(--text-dim);flex:1;cursor:pointer;text-align:center;}
+  .likert input{width:20px;height:20px;accent-color:var(--terracota);}
+
+  .section-label{font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--terracota);margin:26px 0 10px;}
+
+  .btn-submit{
+    background:var(--terracota);color:#fff;font-weight:600;font-size:15.5px;
+    padding:15px 0;border-radius:999px;border:none;width:100%;cursor:pointer;margin-top:20px;
+  }
+  .btn-submit:disabled{opacity:.6;}
+  .msg{margin-top:16px;padding:14px;border-radius:10px;font-size:14px;display:none;}
+  .msg.ok{display:block;background:rgba(138,122,92,0.15);color:var(--cafe);}
+  .msg.err{display:block;background:rgba(193,100,47,0.12);color:var(--terracota-d);}
+  .role-block{display:none;}
+  .role-block.active{display:block;}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-row">
+    <svg viewBox="0 0 140 90" xmlns="http://www.w3.org/2000/svg">
+      <polygon points="45,8 65,8 75,26 65,44 45,44 35,26" fill="#C1642F"/>
+      <polygon points="10,30 30,30 40,48 30,66 10,66 0,48" fill="none" stroke="#5C4A3A" stroke-width="4"/>
+      <polygon points="80,30 100,30 110,48 100,66 80,66 70,48" fill="none" stroke="#5C4A3A" stroke-width="4"/>
+      <polygon points="45,52 65,52 75,70 65,88 45,88 35,70" fill="#5C4A3A"/>
+    </svg>
+    <div class="brand-word"><span class="brand-be">BEEWORK</span><span class="brand-ho">HOGAR</span></div>
+  </div>
+</header>
+
+<div class="wrap">
+  <div class="intro-card">
+    <h1>Un poco más sobre vos</h1>
+    <p>Este cuestionario no tiene respuestas correctas o incorrectas — respondé como sos realmente, no como te gustaría ser. Te toma unos 8-10 minutos.</p>
+    <p>Necesitamos tu DNI para vincular este test con tu postulación.</p>
+  </div>
+
+  <form id="form-test">
+    <div class="field"><label>Nombre completo</label><input type="text" name="nombre" required></div>
+    <div class="field"><label>DNI</label><input type="text" name="dni" required></div>
+    <div class="field">
+      <label>¿A qué rol postulás?</label>
+      <select name="rol" id="rol" required>
+        <option value="" disabled selected>Elegí una opción</option>
+        <option value="empleada">Empleada doméstica</option>
+        <option value="ninera">Niñera</option>
+        <option value="cuidador">Acompañante de adulto mayor</option>
+      </select>
+    </div>
+
+    <div class="progress">Progreso: <span id="prog-count">0</span> / <span id="prog-total">29</span>
+      <div class="bar"><div class="bar-fill" id="bar-fill"></div></div>
+    </div>
+
+    <div class="section-label">Sobre cómo sos en general</div>
+    <div id="general-items"></div>
+
+    <div class="section-label">Algunas afirmaciones más</div>
+    <div id="sinceridad-items"></div>
+
+    <div id="role-ninera" class="role-block" data-role="ninera">
+      <div class="section-label">Sobre el cuidado de niños</div>
+      <div id="ninera-items"></div>
+    </div>
+    <div id="role-cuidador" class="role-block" data-role="cuidador">
+      <div class="section-label">Sobre el cuidado de adultos mayores</div>
+      <div id="cuidador-items"></div>
+    </div>
+    <div id="role-empleada" class="role-block" data-role="empleada">
+      <div class="section-label">Sobre las tareas del hogar</div>
+      <div id="empleada-items"></div>
+    </div>
+
+    <div class="msg" id="msg"></div>
+    <button type="submit" class="btn-submit" id="btn">Enviar test</button>
+  </form>
+</div>
+
+<script>
+const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwesQhElHoNMtTwKdVsBM4kUhvAYYJfbXneHrOdCYp4zI_KmXB3l-L4WBWBI5IiOp2b/exec";
+
+// id: nombre de campo | texto de la afirmación
+const GENERAL = [
+  ['gc1','Cumplo mis tareas enseguida, sin dejarlas para después.'],
+  ['gc2','Muchas veces me olvido de guardar las cosas en su lugar.'],
+  ['gc3','Me gusta el orden.'],
+  ['gc4','Suelo dejar las cosas a medio hacer o desordenadas.'],
+  ['ga1','Me identifico con lo que sienten los demás.'],
+  ['ga2','No me interesan los problemas de los demás.'],
+  ['ga3','Siento las emociones de los demás como propias.'],
+  ['ga4','En realidad no me interesan mucho los demás.'],
+  ['gn1','Tengo cambios de humor frecuentes.'],
+  ['gn2','Estoy relajado/a la mayor parte del tiempo.'],
+  ['gn3','Me altero con facilidad.'],
+  ['gn4','Pocas veces me siento triste.'],
+  ['ge1','Soy quien anima las reuniones sociales.'],
+  ['ge2','No hablo mucho.'],
+  ['ge3','Hablo con mucha gente distinta en las reuniones sociales.'],
+  ['ge4','Prefiero quedarme en un segundo plano.'],
+  ['go1','Tengo mucha imaginación.'],
+  ['go2','No me interesan las ideas abstractas.'],
+  ['go3','Me cuesta entender ideas abstractas.'],
+  ['go4','Tengo muy buenas ideas.']
+];
+const SINCERIDAD = [
+  ['gs1','Nunca en mi vida dije una mentira, ni siquiera chiquita.'],
+  ['gs2','Siempre estoy de buen humor, sin excepción.'],
+  ['gs3','Jamás sentí bronca o rabia hacia otra persona.']
+];
+const NINERA = [
+  ['nn1','Puedo repetir la misma explicación varias veces sin perder la paciencia.'],
+  ['nn2','Un berrinche o llanto de un chico no me altera ni me hace perder el control.'],
+  ['nn3','Disfruto jugar y estar al nivel de un niño, sin aburrirme fácil.'],
+  ['nr1','Ante una emergencia con un niño, sé que puedo reaccionar rápido y con calma.'],
+  ['nr2','Estoy atenta todo el tiempo a lo que hace un niño a mi cargo, aunque esté haciendo otra tarea.'],
+  ['nr3','Sabría qué hacer si un chico se lastima o se descompone estando bajo mi cuidado.']
+];
+const CUIDADOR = [
+  ['cv1','Puedo tratar con cariño y respeto a una persona aunque ya no se acuerde bien de las cosas.'],
+  ['cv2','No me incomoda ayudar a alguien con tareas íntimas como bañarse o vestirse.'],
+  ['cv3','Entiendo que el mal humor de una persona mayor a veces viene del dolor o el miedo, no de mí.'],
+  ['cr1','Sería muy cuidadosa/o con los horarios de medicación de una persona a mi cargo.'],
+  ['cr2','Estoy dispuesta/o a repetir la misma rutina de cuidado todos los días sin cansarme de eso.'],
+  ['cr3','Avisaría enseguida si noto algo raro en la salud de la persona que cuido.']
+];
+const EMPLEADA = [
+  ['eo1','Me gusta que las cosas queden prolijas y en su lugar, aunque nadie me lo pida.'],
+  ['eo2','Reviso mi propio trabajo para asegurarme de que quedó bien hecho.'],
+  ['eo3','Noto fácilmente cuando algo está fuera de lugar o sucio.'],
+  ['ea1','Puedo organizar mi propio orden de tareas sin que me digan paso a paso qué hacer.'],
+  ['ea2','Si me falta un producto de limpieza, busco una solución en vez de parar la tarea.'],
+  ['ea3','Trabajo igual de bien esté alguien mirando o no.']
+];
+
+function renderLikert(containerId, items){
+  const c = document.getElementById(containerId);
+  items.forEach(([id, text]) => {
+    const div = document.createElement('div');
+    div.className = 'q-block';
+    div.innerHTML = `<div class="q-text">${text}</div>
+      <div class="likert">
+        ${[1,2,3,4,5].map(v => `<label>${v===1?'Muy<br>inexacto':v===3?'Neutral':v===5?'Muy<br>exacto':''}<input type="radio" name="${id}" value="${v}" required></label>`).join('')}
+      </div>`;
+    c.appendChild(div);
+  });
+}
+renderLikert('general-items', GENERAL);
+renderLikert('sinceridad-items', SINCERIDAD);
+renderLikert('ninera-items', NINERA);
+renderLikert('cuidador-items', CUIDADOR);
+renderLikert('empleada-items', EMPLEADA);
+
+const rolSelect = document.getElementById('rol');
+const roleBlocks = document.querySelectorAll('.role-block');
+function updateRole(){
+  roleBlocks.forEach(b => {
+    const active = b.dataset.role === rolSelect.value;
+    b.classList.toggle('active', active);
+    b.querySelectorAll('input[type=radio]').forEach(inp => inp.required = active);
+  });
+  updateProgress();
+}
+rolSelect.addEventListener('change', updateRole);
+
+const form = document.getElementById('form-test');
+function totalRequired(){
+  return form.querySelectorAll('input[type=radio][required]').length / 5;
+}
+function updateProgress(){
+  const total = totalRequired();
+  const answered = new Set();
+  form.querySelectorAll('input[type=radio]:checked').forEach(i => {
+    if(i.required) answered.add(i.name);
+  });
+  document.getElementById('prog-total').textContent = total;
+  document.getElementById('prog-count').textContent = answered.size;
+  document.getElementById('bar-fill').style.width = (total ? (answered.size/total*100) : 0) + '%';
+}
+form.addEventListener('change', updateProgress);
+updateProgress();
+
+const msg = document.getElementById('msg');
+const btn = document.getElementById('btn');
+
+form.addEventListener('submit', async (e) => {
+  e.preventDefault();
+  msg.className = 'msg'; msg.textContent = '';
+  btn.disabled = true; btn.textContent = 'Enviando...';
+  try{
+    const fd = new FormData(form);
+    const payload = { tipo: 'test' };
+    fd.forEach((v,k) => payload[k] = v);
+    const res = await fetch(SCRIPT_URL, {
+      method:'POST', headers:{'Content-Type':'text/plain;charset=utf-8'}, body: JSON.stringify(payload)
+    });
+    const data = await res.json();
+    if(data.ok){
+      msg.className='msg ok';
+      msg.textContent = '¡Listo! Recibimos tus respuestas. Gracias por tomarte el tiempo.';
+      form.reset(); updateRole();
+    } else { throw new Error(data.error || 'Error'); }
+  } catch(err){
+    msg.className='msg err';
+    msg.textContent = 'Hubo un problema al enviar. Probá de nuevo en unos minutos.';
+    console.error(err);
+  } finally {
+    btn.disabled = false; btn.textContent = 'Enviar test';
+  }
+});
+</script>
+</body>
+</html>
