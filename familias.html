@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="light">
+<title>BeeWork Hogar — Encontrá a la persona correcta para tu casa</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --terracota:#C1642F; --terracota-d:#A54F22; --terracota-l:#E8935F;
+    --arena:#EFE4D3; --arena-osc:#E4D2B8; --musgo:#8A7A5C; --cafe:#5C4A3A; --cafe-d:#3E3226;
+    --card:#FFFDF8; --text:#4A3A2C; --text-dim:#8A7A5C; --line:rgba(92,74,58,0.14);
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  html{scroll-behavior:smooth;}
+  body{background:var(--arena);color:var(--text);font-family:'Poppins',sans-serif;line-height:1.65;-webkit-font-smoothing:antialiased;}
+  .wrap{max-width:1080px;margin:0 auto;padding:0 28px;}
+  a{color:inherit;}
+  img,svg{display:block;max-width:100%;}
+  ::selection{background:var(--terracota);color:#fff;}
+
+  header{background:rgba(255,253,248,0.92);backdrop-filter:blur(8px);padding:20px 0;border-bottom:1px solid var(--line);position:sticky;top:0;z-index:30;}
+  .header-row{display:flex;align-items:center;justify-content:space-between;}
+  .brand{display:flex;align-items:center;gap:12px;}
+  .brand svg{width:36px;}
+  .brand-word{display:flex;flex-direction:column;line-height:1.05;}
+  .brand-be{font-weight:700;font-size:14.5px;letter-spacing:1.6px;color:var(--terracota);}
+  .brand-ho{font-weight:600;font-size:9.5px;letter-spacing:2.8px;color:var(--cafe);}
+  .nav-links{display:flex;align-items:center;gap:28px;font-size:14px;font-weight:500;color:var(--cafe);}
+  .nav-links a{opacity:0.75;transition:opacity .2s;}
+  .nav-links a:hover{opacity:1;}
+  .cta-header{
+    background:var(--cafe);color:#FFFDF8;font-weight:600;font-size:13.5px;
+    padding:11px 22px;border-radius:999px;text-decoration:none;transition:background .2s, transform .15s;
+  }
+  .cta-header:hover{background:var(--cafe-d);transform:translateY(-1px);}
+
+  /* HERO */
+  .hero{position:relative;padding:80px 0 60px;overflow:hidden;}
+  .hero-grid{display:grid;grid-template-columns:1.1fr 0.9fr;gap:50px;align-items:center;}
+  .eyebrow{font-size:12px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--terracota);margin-bottom:18px;display:flex;align-items:center;gap:10px;}
+  .eyebrow::before{content:'';width:22px;height:2px;background:var(--terracota);}
+  h1{font-size:44px;font-weight:700;color:var(--cafe);line-height:1.12;letter-spacing:-0.5px;margin-bottom:22px;}
+  h1 em{font-style:normal;color:var(--terracota);}
+  .hero p.lead{font-size:17px;color:var(--text-dim);max-width:480px;margin-bottom:32px;font-weight:400;}
+  .hero-ctas{display:flex;gap:16px;flex-wrap:wrap;align-items:center;margin-bottom:34px;}
+  .btn-primary{
+    background:var(--terracota);color:#FFFDF8;font-weight:600;font-size:15.5px;
+    padding:17px 32px;border-radius:999px;text-decoration:none;display:inline-flex;align-items:center;gap:10px;
+    box-shadow:0 10px 26px rgba(193,100,47,0.3);transition:transform .18s ease, background .2s ease, box-shadow .2s;
+  }
+  .btn-primary:hover{background:var(--terracota-d);transform:translateY(-2px);box-shadow:0 14px 30px rgba(193,100,47,0.38);}
+  .btn-ghost{color:var(--cafe);font-weight:600;font-size:15px;text-decoration:none;border-bottom:2px solid var(--arena-osc);padding-bottom:2px;transition:border-color .2s;}
+  .btn-ghost:hover{border-color:var(--terracota);}
+
+  .trust-row{display:flex;gap:26px;flex-wrap:wrap;}
+  .trust-item{display:flex;align-items:center;gap:8px;font-size:13px;color:var(--cafe);font-weight:500;}
+  .trust-item svg{width:16px;height:16px;flex-shrink:0;}
+
+  /* HERO VISUAL: casa de hexágonos */
+  .hero-visual{position:relative;display:flex;justify-content:center;}
+  .hex-house{width:100%;max-width:400px;}
+  .hex-house .float{animation:float 5s ease-in-out infinite;}
+  .hex-house .float2{animation:float 5.5s ease-in-out infinite .4s;}
+  .hex-house .float3{animation:float 6s ease-in-out infinite .8s;}
+  @keyframes float{0%,100%{transform:translateY(0);}50%{transform:translateY(-7px);}}
+  @media (prefers-reduced-motion: reduce){.hex-house *{animation:none !important;}}
+
+  /* SECTIONS */
+  section{padding:64px 0;}
+  .section-title{font-size:12px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:var(--terracota);margin-bottom:12px;}
+  h2{font-size:30px;font-weight:600;color:var(--cafe);letter-spacing:-0.3px;margin-bottom:16px;max-width:600px;}
+  .section-sub{font-size:15.5px;color:var(--text-dim);max-width:560px;margin-bottom:44px;}
+
+  /* SERVICIOS */
+  .services-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;}
+  .service-card{
+    background:var(--card);border:1px solid var(--line);border-radius:18px;overflow:hidden;
+    position:relative;transition:transform .25s ease, box-shadow .25s ease;
+    scroll-margin-top:100px;
+  }
+  .service-card:target{border-color:var(--terracota);box-shadow:0 0 0 3px rgba(193,100,47,0.15);}
+  .service-card:hover{transform:translateY(-4px);box-shadow:0 16px 36px rgba(92,74,58,0.1);}
+  .service-card .service-photo{width:100%;height:150px;object-fit:cover;object-position:center 20%;display:block;}
+  .service-card .service-body{padding:26px 24px 30px;}
+  .service-card .hex-icon{width:44px;margin-bottom:20px;}
+  .service-card h3{font-size:18px;font-weight:600;color:var(--cafe);margin-bottom:10px;}
+  .service-card p{font-size:14px;color:var(--text-dim);}
+
+  /* PROCESO */
+  .process-wrap{position:relative;}
+  .process-line{position:absolute;left:23px;top:14px;bottom:14px;width:2px;background:var(--arena-osc);}
+  .process-item{display:flex;gap:22px;padding-bottom:36px;position:relative;}
+  .process-item:last-child{padding-bottom:0;}
+  .process-num{
+    flex:0 0 48px;height:48px;border-radius:50%;background:var(--card);border:2px solid var(--terracota);
+    color:var(--terracota);font-weight:700;font-size:17px;display:flex;align-items:center;justify-content:center;
+    position:relative;z-index:1;
+  }
+  .process-text h3{font-size:16.5px;font-weight:600;color:var(--cafe);margin-bottom:5px;padding-top:10px;}
+  .process-text p{font-size:14px;color:var(--text-dim);max-width:520px;}
+
+  /* CONDICIONES */
+  .terms-card{background:var(--cafe);border-radius:22px;padding:44px 40px;color:var(--arena);}
+  .terms-card .section-title{color:var(--terracota-l);}
+  .terms-card h2{color:#fff;}
+  .terms-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:24px;margin-top:30px;}
+  .term-box{border-top:2px solid rgba(239,228,211,0.25);padding-top:16px;}
+  .term-box .term-num{font-size:26px;font-weight:700;color:var(--terracota-l);margin-bottom:8px;display:block;}
+  .term-box p{font-size:13px;color:var(--arena-osc);line-height:1.5;}
+
+  /* GARANTIAS */
+  .guarantee-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;}
+  .guarantee{display:flex;flex-direction:column;gap:10px;}
+  .guarantee .g-icon{width:38px;height:38px;border-radius:12px;background:var(--arena-osc);display:flex;align-items:center;justify-content:center;}
+  .guarantee .g-icon svg{width:20px;height:20px;color:var(--terracota-d);}
+  .guarantee h3{font-size:15.5px;font-weight:600;color:var(--cafe);}
+  .guarantee p{font-size:13.5px;color:var(--text-dim);}
+
+  /* CTA FINAL */
+  .final-cta{background:var(--card);border:1px solid var(--line);border-radius:24px;padding:56px 44px;text-align:center;position:relative;overflow:hidden;}
+  .final-cta h2{margin:0 auto 14px;}
+  .final-cta p{font-size:15.5px;color:var(--text-dim);max-width:460px;margin:0 auto 30px;}
+
+  footer{background:var(--cafe);padding:44px 0 32px;text-align:center;}
+  footer svg{margin:0 auto 14px;width:44px;}
+  .footer-brand{color:var(--arena);font-weight:700;letter-spacing:1px;font-size:14px;margin-bottom:10px;}
+  footer p{color:var(--arena-osc);font-size:13px;margin-bottom:4px;opacity:0.85;}
+  .footer-links{margin-top:16px;font-size:13px;}
+  .footer-links a{color:var(--arena);text-decoration:underline;opacity:0.8;}
+
+  @media (max-width:860px){
+    .hero-grid{grid-template-columns:1fr;}
+    .hero-visual{order:-1;max-width:280px;margin:0 auto 20px;}
+    h1{font-size:32px;}
+    .services-grid{grid-template-columns:1fr;}
+    .guarantee-grid{grid-template-columns:repeat(2,1fr);}
+    .terms-grid{grid-template-columns:repeat(2,1fr);}
+    .nav-links{display:none;}
+    .terms-card{padding:32px 24px;}
+    .final-cta{padding:40px 24px;}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap header-row">
+    <div class="brand">
+      <svg viewBox="0 0 140 90" xmlns="http://www.w3.org/2000/svg">
+        <polygon points="45,8 65,8 75,26 65,44 45,44 35,26" fill="#C1642F"/>
+        <polygon points="10,30 30,30 40,48 30,66 10,66 0,48" fill="none" stroke="#5C4A3A" stroke-width="4"/>
+        <polygon points="80,30 100,30 110,48 100,66 80,66 70,48" fill="none" stroke="#5C4A3A" stroke-width="4"/>
+        <polygon points="45,52 65,52 75,70 65,88 45,88 35,70" fill="#5C4A3A"/>
+      </svg>
+      <div class="brand-word"><span class="brand-be">BEEWORK</span><span class="brand-ho">HOGAR</span></div>
+    </div>
+    <nav class="nav-links">
+      <a href="index.html">← Inicio</a>
+      <a href="#servicios">Servicios</a>
+      <a href="#proceso">Cómo funciona</a>
+      <a href="#condiciones">Condiciones</a>
+    </nav>
+    <a href="#contacto" class="cta-header">Iniciar una búsqueda</a>
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="wrap hero-grid">
+    <div>
+      <div class="eyebrow">Para familias de Salta y el Norte de Argentina</div>
+      <h1>Que entre a tu casa alguien en quien <em>ya confiaste antes</em> de conocerla.</h1>
+      <p class="lead">Buscamos, evaluamos y te presentamos personal doméstico, niñeras y acompañantes de adultos mayores — verificados y evaluados antes de que los conozcas vos.</p>
+      <div class="hero-ctas">
+        <a href="#contacto" class="btn-primary">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 2C6.48 2 2 6.48 2 12c0 1.85.5 3.58 1.38 5.07L2 22l5.07-1.35A9.94 9.94 0 0 0 12 22c5.52 0 10-4.48 10-10S17.52 2 12 2z" fill="#FFFDF8" fill-opacity="0.18"/><path d="M17.47 14.38c-.27-.14-1.6-.79-1.85-.88-.25-.09-.43-.14-.61.14-.18.27-.7.88-.86 1.06-.16.18-.32.2-.59.07-.27-.14-1.14-.42-2.17-1.34-.8-.71-1.34-1.6-1.5-1.87-.16-.27-.02-.42.12-.55.12-.12.27-.32.41-.48.14-.16.18-.27.27-.45.09-.18.05-.34-.02-.48-.07-.14-.61-1.47-.84-2.01-.22-.53-.44-.46-.61-.47-.16-.01-.34-.01-.52-.01-.18 0-.48.07-.73.34-.25.27-.96.94-.96 2.29 0 1.35.98 2.65 1.12 2.83.14.18 1.93 2.95 4.68 4.14.65.28 1.16.45 1.56.58.66.21 1.25.18 1.72.11.52-.08 1.6-.65 1.83-1.28.23-.63.23-1.17.16-1.28-.07-.11-.25-.18-.52-.32z" fill="#FFFDF8"/></svg>
+          Iniciar una búsqueda
+        </a>
+        <a href="#proceso" class="btn-ghost">Ver cómo funciona</a>
+      </div>
+      <div class="trust-row">
+        <div class="trust-item"><svg viewBox="0 0 24 24" fill="none" stroke="#C1642F" stroke-width="2.2"><path d="M5 13l4 4L19 7"/></svg> Perfiles verificados</div>
+        <div class="trust-item"><svg viewBox="0 0 24 24" fill="none" stroke="#C1642F" stroke-width="2.2"><path d="M5 13l4 4L19 7"/></svg> Garantía de reemplazo 60 días</div>
+        <div class="trust-item"><svg viewBox="0 0 24 24" fill="none" stroke="#C1642F" stroke-width="2.2"><path d="M5 13l4 4L19 7"/></svg> Ley 25.326</div>
+      </div>
+    </div>
+
+    <div class="hero-visual">
+      <svg class="hex-house" viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
+        <!-- techo -->
+        <path d="M60 170 L200 60 L340 170" fill="none" stroke="#5C4A3A" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+        <!-- paredes -->
+        <rect x="75" y="168" width="250" height="185" rx="14" fill="#FFFDF8" stroke="#E4D2B8" stroke-width="2"/>
+        <!-- hexágono central: cocina/limpieza -->
+        <g class="float">
+          <polygon points="200,205 235,225 235,265 200,285 165,265 165,225" fill="#C1642F"/>
+          <path d="M185 250 h30 M185 240 h30" stroke="#FFFDF8" stroke-width="4" stroke-linecap="round"/>
+        </g>
+        <!-- hexágono izq: niñera -->
+        <g class="float2">
+          <polygon points="115,235 145,252 145,286 115,303 85,286 85,252" fill="none" stroke="#5C4A3A" stroke-width="4"/>
+          <circle cx="115" cy="270" r="10" fill="#5C4A3A"/>
+          <path d="M100 288 q15 -14 30 0" stroke="#5C4A3A" stroke-width="4" fill="none" stroke-linecap="round"/>
+        </g>
+        <!-- hexágono der: adulto mayor -->
+        <g class="float3">
+          <polygon points="285,235 315,252 315,286 285,303 255,286 255,252" fill="none" stroke="#5C4A3A" stroke-width="4"/>
+          <circle cx="285" cy="266" r="9" fill="#5C4A3A"/>
+          <path d="M270 292 q15 -12 30 0" stroke="#5C4A3A" stroke-width="4" fill="none" stroke-linecap="round"/>
+          <path d="M285 275 v10" stroke="#5C4A3A" stroke-width="4" stroke-linecap="round"/>
+        </g>
+        <!-- puerta -->
+        <rect x="184" y="305" width="32" height="48" rx="4" fill="#E4D2B8"/>
+      </svg>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICIOS -->
+<section id="servicios">
+  <div class="wrap">
+    <div class="section-title">Qué tipo de búsqueda necesitás</div>
+    <h2>Tres perfiles, un mismo estándar de selección</h2>
+    <p class="section-sub">Cada búsqueda pasa por la misma evaluación, sin importar el rol: entrevista, verificación de antecedentes y referencias, y un test que nos ayuda a entender cómo es la persona más allá del currículum.</p>
+    <div class="services-grid">
+      <div class="service-card" id="servicio-empleada">
+        <img class="service-photo" src="empleada.jpg" alt="Empleada doméstica de BeeWork Hogar ordenando la casa">
+        <div class="service-body">
+          <svg class="hex-icon" viewBox="0 0 140 90"><polygon points="45,8 65,8 75,26 65,44 45,44 35,26" fill="#C1642F"/></svg>
+          <h3>Empleada doméstica</h3>
+          <p>Limpieza, orden y mantenimiento del hogar. Con o sin retiro, según lo que necesite tu familia.</p>
+        </div>
+      </div>
+      <div class="service-card" id="servicio-ninera">
+        <img class="service-photo" src="ninera.jpg" alt="Niñera de BeeWork Hogar jugando con un niño">
+        <div class="service-body">
+          <svg class="hex-icon" viewBox="0 0 140 90"><polygon points="45,8 65,8 75,26 65,44 45,44 35,26" fill="#C1642F"/></svg>
+          <h3>Niñera</h3>
+          <p>Cuidado y contención de tus hijos, con experiencia comprobable y referencias verificadas.</p>
+        </div>
+      </div>
+      <div class="service-card" id="servicio-cuidador">
+        <img class="service-photo" src="cuidador.jpg" alt="Cuidador de BeeWork Hogar acompañando a una persona mayor">
+        <div class="service-body">
+          <svg class="hex-icon" viewBox="0 0 140 90"><polygon points="45,8 65,8 75,26 65,44 45,44 35,26" fill="#C1642F"/></svg>
+          <h3>Acompañante de adulto mayor</h3>
+          <p>Acompañamiento y asistencia no terapéutica para personas mayores autónomas o con dependencia leve.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROCESO -->
+<section id="proceso" style="background:var(--arena-osc);">
+  <div class="wrap">
+    <div class="section-title">Cómo funciona</div>
+    <h2>De tu pedido a tu primer día tranquila</h2>
+    <p class="section-sub">Vos no hacés la búsqueda: la seguís de cerca, con novedades claras en cada etapa.</p>
+    <div class="process-wrap">
+      <div class="process-line"></div>
+      <div class="process-item">
+        <div class="process-num">1</div>
+        <div class="process-text"><h3>Nos contás qué necesitás</h3><p>Perfil, horario, zona, y cualquier condición particular de tu casa o tu familia.</p></div>
+      </div>
+      <div class="process-item">
+        <div class="process-num">2</div>
+        <div class="process-text"><h3>Buscamos en nuestra base certificada</h3><p>Cruzamos tu pedido con postulantes ya evaluados: entrevista, antecedentes, referencias y test.</p></div>
+      </div>
+      <div class="process-item">
+        <div class="process-num">3</div>
+        <div class="process-text"><h3>Te presentamos a los postulantes</h3><p>Perfiles concretos, no una lista larga — para que decidas con información real.</p></div>
+      </div>
+      <div class="process-item">
+        <div class="process-num">4</div>
+        <div class="process-text"><h3>Entrevista con un equipo profesional y semana de prueba</h3><p>Psicólogos y profesionales de RRHH evalúan las competencias específicas del rol, y luego una semana para que ambas partes se aseguren de que funciona.</p></div>
+      </div>
+      <div class="process-item">
+        <div class="process-num">5</div>
+        <div class="process-text"><h3>Contratación formal</h3><p>Relación laboral en regla, según la Ley 26.844 del Personal de Casas Particulares.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONDICIONES -->
+<section id="condiciones">
+  <div class="wrap">
+    <div class="terms-card">
+      <div class="section-title">Condiciones claras, desde el principio</div>
+      <h2>Sin sorpresas en el camino</h2>
+      <div class="terms-grid" style="grid-template-columns:repeat(3,1fr);">
+        <div class="term-box"><span class="term-num">1 sueldo</span><p>Honorario de búsqueda: el equivalente a un sueldo mensual pactado con el postulante seleccionado.</p></div>
+        <div class="term-box"><span class="term-num">3 partes</span><p>Pago en tres partes: seña al iniciar la búsqueda, segunda parte a los 15 días, y saldo final a los 30 días.</p></div>
+        <div class="term-box"><span class="term-num">60 días</span><p>Garantía de reemplazo: si algo no funciona en los primeros 60 días, buscamos de nuevo sin costo adicional.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- GARANTIAS / CONFIANZA -->
+<section>
+  <div class="wrap">
+    <div class="section-title">Por qué confiar en el proceso</div>
+    <h2>Lo que hacemos antes de que la conozcas vos</h2>
+    <div class="guarantee-grid">
+      <div class="guarantee">
+        <div class="g-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 12l2 2 4-4M12 3l8 4v5c0 5-3.5 9-8 10-4.5-1-8-5-8-10V7l8-4z"/></svg></div>
+        <h3>Verificación de antecedentes</h3>
+        <p>Cada postulante pasa un control antes de sumarse a la base activa.</p>
+      </div>
+      <div class="guarantee">
+        <div class="g-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/></svg></div>
+        <h3>Test de evaluación</h3>
+        <p>Un cuestionario propio evalúa responsabilidad, trato y estabilidad emocional.</p>
+      </div>
+      <div class="guarantee">
+        <div class="g-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2M9 11a4 4 0 100-8 4 4 0 000 8zM23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg></div>
+        <h3>Referencias reales</h3>
+        <p>Contactamos a empleadores anteriores, no solo el currículum.</p>
+      </div>
+      <div class="guarantee">
+        <div class="g-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a5 5 0 00-9.33-2.5M9 11a4 4 0 100-8 4 4 0 000 8zm7.5 -1.5a3 3 0 100-6 3 3 0 000 6z"/></svg></div>
+        <h3>Entrevistas focalizadas</h3>
+        <p>Un profesional evalúa las competencias específicas de cada rol.</p>
+      </div>
+      <div class="guarantee">
+        <div class="g-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg></div>
+        <h3>Registración ante ARCA sin costo</h3>
+        <p>Te asesoramos y hacemos gratis el trámite según la Ley 26.844.</p>
+      </div>
+      <div class="guarantee">
+        <div class="g-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 15a3 3 0 100-6 3 3 0 000 6z"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 11-2.83 2.83l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 11-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 11-2.83-2.83l.06-.06A1.65 1.65 0 004.6 15a1.65 1.65 0 00-1.51-1H3a2 2 0 110-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 112.83-2.83l.06.06A1.65 1.65 0 009 4.6a1.65 1.65 0 001-1.51V3a2 2 0 114 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 112.83 2.83l-.06.06A1.65 1.65 0 0019.4 9a1.65 1.65 0 001.51 1H21a2 2 0 110 4h-.09a1.65 1.65 0 00-1.51 1z"/></svg></div>
+        <h3>Protección de tus datos</h3>
+        <p>Tu información y la del postulante se manejan según la Ley 25.326.</p>
+      </div>
+      <div class="guarantee">
+        <div class="g-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><path d="M14 2v6h6M9 15l2 2 4-4"/></svg></div>
+        <h3>Relación laboral en regla</h3>
+        <p>Formalizamos el vínculo según la Ley 26.844 de Casas Particulares.</p>
+      </div>
+      <div class="guarantee">
+        <div class="g-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg></div>
+        <h3>Acompañamiento continuo</h3>
+        <p>Seguimos disponibles después de la contratación, no solo hasta firmar.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA FINAL -->
+<section id="contacto">
+  <div class="wrap">
+    <div class="final-cta">
+      <div class="section-title">Empecemos</div>
+      <h2>Contanos qué necesitás para tu casa</h2>
+      <p>Un mensaje directo por WhatsApp — te respondemos con los próximos pasos de tu búsqueda.</p>
+      <a id="wa-btn" class="btn-primary" href="#" target="_blank" rel="noopener">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M17.47 14.38c-.27-.14-1.6-.79-1.85-.88-.25-.09-.43-.14-.61.14-.18.27-.7.88-.86 1.06-.16.18-.32.2-.59.07-.27-.14-1.14-.42-2.17-1.34-.8-.71-1.34-1.6-1.5-1.87-.16-.27-.02-.42.12-.55.12-.12.27-.32.41-.48.14-.16.18-.27.27-.45.09-.18.05-.34-.02-.48-.07-.14-.61-1.47-.84-2.01-.22-.53-.44-.46-.61-.47-.16-.01-.34-.01-.52-.01-.18 0-.48.07-.73.34-.25.27-.96.94-.96 2.29 0 1.35.98 2.65 1.12 2.83.14.18 1.93 2.95 4.68 4.14.65.28 1.16.45 1.56.58.66.21 1.25.18 1.72.11.52-.08 1.6-.65 1.83-1.28.23-.63.23-1.17.16-1.28-.07-.11-.25-.18-.52-.32z" fill="#FFFDF8"/></svg>
+        Escribir por WhatsApp
+      </a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <svg viewBox="0 0 140 90" xmlns="http://www.w3.org/2000/svg">
+    <polygon points="45,8 65,8 75,26 65,44 45,44 35,26" fill="#C1642F"/>
+    <polygon points="10,30 30,30 40,48 30,66 10,66 0,48" fill="none" stroke="#E4D2B8" stroke-width="4"/>
+    <polygon points="80,30 100,30 110,48 100,66 80,66 70,48" fill="none" stroke="#E4D2B8" stroke-width="4"/>
+    <polygon points="45,52 65,52 75,70 65,88 45,88 35,70" fill="#E4D2B8"/>
+  </svg>
+  <div class="footer-brand">BEEWORK HOGAR</div>
+  <p>Un servicio de BeeWork SRL</p>
+  <p>📞 387 5488458 &nbsp;|&nbsp; ✉️ beeworkhogar@gmail.com</p>
+  <p>📷 @beeworkhogar &nbsp;|&nbsp; <a href="https://www.facebook.com/BeeworkHogar" style="color:var(--arena);text-decoration:underline;">Facebook</a></p>
+  <div class="footer-links"><a href="index.html">← Inicio</a> &nbsp;·&nbsp; <a href="postularte.html">¿Buscás trabajo? Postulate acá →</a></div>
+</footer>
+
+<script>
+  // Ajustá este número si querés que las consultas de familias lleguen a otro WhatsApp
+  const NUMERO_WHATSAPP = '5493875488458';
+  const mensaje = encodeURIComponent('Hola! Quiero iniciar una búsqueda de personal con BeeWork Hogar. Necesito: ');
+  document.getElementById('wa-btn').href = `https://wa.me/${NUMERO_WHATSAPP}?text=${mensaje}`;
+</script>
+</body>
+</html>
