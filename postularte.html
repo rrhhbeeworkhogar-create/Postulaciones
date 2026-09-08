@@ -509,7 +509,7 @@ src="https://www.facebook.com/tr?id=1412505504222087&ev=PageView&noscript=1"
     btn.disabled = true;
     btn.textContent = 'Enviando...';
 
-    try{
+        try{
       const fd = new FormData(form);
       const payload = {};
       fd.forEach((value, key) => {
@@ -518,23 +518,14 @@ src="https://www.facebook.com/tr?id=1412505504222087&ev=PageView&noscript=1"
       payload.cv = await fileToBase64(cvFile);
       payload.foto = await fileToBase64(fotoFile);
       payload.timestamp = new Date().toISOString();
-
       const res = await fetch(SCRIPT_URL, {
         method: 'POST',
         headers: { 'Content-Type': 'text/plain;charset=utf-8' },
         body: JSON.stringify(payload)
       });
       const data = await res.json();
-
       if(data.ok){
-  fbq('track', 'Lead');
-  msg.className = 'form-msg ok';
-  msg.textContent = '¡Listo! Recibimos tu postulación. Te contactamos si tu perfil coincide con una búsqueda activa.';
-  form.reset();
-  extras.forEach(el => el.classList.remove('active'));
-} else {
-  throw new Error(data.error || 'Error desconocido');
-}
+        fbq('track', 'Lead');
         msg.className = 'form-msg ok';
         msg.textContent = '¡Listo! Recibimos tu postulación. Te contactamos si tu perfil coincide con una búsqueda activa.';
         form.reset();
