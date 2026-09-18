@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="light">
+<title>¡Listo! Ya sos parte de BeeWork Hogar</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --terracota:#C1642F;
+    --terracota-d:#A54F22;
+    --arena:#EFE4D3;
+    --arena-osc:#E4D2B8;
+    --cafe:#5C4A3A;
+    --crema:#FFFDF8;
+    --text:#4A3A2C;
+    --text-dim:#8A7A5C;
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){ --arena:#E9DCC6; --arena-osc:#DDC9A9; }
+  }
+  :root[data-theme="dark"]{ --arena:#E9DCC6; --arena-osc:#DDC9A9; }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{
+    font-family:'Poppins',sans-serif;
+    background:var(--arena);
+    color:var(--text);
+    min-height:100vh;
+    display:flex;
+    justify-content:center;
+    padding:48px 20px 80px;
+  }
+  .wrap{width:100%;max-width:620px;display:flex;flex-direction:column;gap:28px;}
+
+  .hexrow{display:flex;gap:10px;justify-content:center;}
+
+  .hero{
+    text-align:center;display:flex;flex-direction:column;gap:12px;
+    padding:8px 8px 4px;
+  }
+  .hero .kicker{font-size:14px;font-weight:600;letter-spacing:1.5px;color:var(--terracota);text-transform:uppercase;}
+  .hero h1{font-size:clamp(28px,6vw,38px);font-weight:700;color:var(--cafe);line-height:1.2;}
+  .hero p{font-size:17px;color:var(--text-dim);line-height:1.55;max-width:480px;margin:0 auto;}
+
+  .card{
+    background:var(--crema);
+    border-radius:20px;
+    padding:28px 26px;
+    display:flex;flex-direction:column;gap:18px;
+    box-shadow:0 2px 14px rgba(74,58,44,0.06);
+  }
+  .card h2{font-size:19px;font-weight:600;color:var(--cafe);}
+
+  .step{display:flex;gap:14px;align-items:flex-start;}
+  .step .n{
+    flex:0 0 30px;height:30px;border-radius:50%;
+    background:var(--arena-osc);color:var(--cafe);
+    font-weight:700;font-size:14px;
+    display:flex;align-items:center;justify-content:center;
+  }
+  .step p{font-size:15.5px;line-height:1.5;color:var(--text);padding-top:4px;}
+  .step strong{color:var(--cafe);}
+
+  .promo{
+    background:var(--arena-osc);
+    border-radius:16px;
+    padding:18px 22px;
+    display:flex;gap:14px;align-items:flex-start;
+  }
+  .promo svg{flex:0 0 auto;width:22px;height:20px;margin-top:3px;}
+  .promo p{font-size:14.5px;line-height:1.5;color:var(--cafe);font-weight:500;}
+
+  .fijo{
+    display:flex;gap:14px;align-items:flex-start;
+    border-left:3px solid var(--terracota);
+    padding-left:16px;
+  }
+  .fijo p{font-size:14.5px;line-height:1.55;color:var(--text-dim);}
+  .fijo strong{color:var(--terracota);}
+
+  .cta{
+    display:flex;align-items:center;justify-content:center;gap:10px;
+    background:var(--terracota);color:var(--crema);
+    text-decoration:none;
+    font-weight:600;font-size:16.5px;
+    padding:18px 24px;border-radius:14px;
+    transition:background .18s ease;
+  }
+  .cta:hover{background:var(--terracota-d);}
+  .cta svg{width:20px;height:20px;}
+
+  .footer{
+    text-align:center;
+    font-size:13px;color:var(--text-dim);
+    display:flex;flex-direction:column;gap:4px;
+  }
+  .footer .tag{font-weight:600;color:var(--cafe);}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="hexrow">
+    <svg width="30" height="26" viewBox="0 0 46 40"><polygon points="14,2 32,2 41,20 32,38 14,38 5,20" fill="#C1642F"/></svg>
+    <svg width="30" height="26" viewBox="0 0 46 40"><polygon points="14,2 32,2 41,20 32,38 14,38 5,20" fill="none" stroke="#5C4A3A" stroke-width="2.5"/></svg>
+    <svg width="30" height="26" viewBox="0 0 46 40"><polygon points="14,2 32,2 41,20 32,38 14,38 5,20" fill="#5C4A3A"/></svg>
+  </div>
+
+  <div class="hero">
+    <div class="kicker">Membresía activada</div>
+    <h1>¡Listo! Ya sos parte de BeeWork Hogar 🎉</h1>
+    <p>Tu membresía quedó registrada. A partir de ahora tenés acceso prioritario a nuestra red de trabajadoras verificadas para lo que necesites.</p>
+  </div>
+
+  <div class="card">
+    <h2>¿Y ahora qué?</h2>
+    <div class="step">
+      <div class="n">1</div>
+      <p>Guardá <strong>este número de WhatsApp</strong> — es el canal para coordinar cualquier turno eventual.</p>
+    </div>
+    <div class="step">
+      <div class="n">2</div>
+      <p>Cuando necesites un turno (niñera, limpieza, cuidado puntual), escribinos con <strong>día, horario y tipo de servicio</strong> y te confirmamos disponibilidad.</p>
+    </div>
+    <div class="step">
+      <div class="n">3</div>
+      <p>Vas a pagar directo a la trabajadora por su turno, y a BeeWork Hogar solo la comisión de gestión — siempre por separado.</p>
+    </div>
+  </div>
+
+  <div class="promo">
+    <svg viewBox="0 0 24 24" fill="none" stroke="#5C4A3A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><path d="M12 6v6l4 2"></path></svg>
+    <p>Tu primer mes es gratis. Para conservarlo, usá al menos <strong>1 turno eventual</strong> dentro de los próximos 30 días.</p>
+  </div>
+
+  <div class="fijo">
+    <p>¿Encontraste a la persona ideal? Si la usás en <strong>3 turnos o más</strong>, podés contratarla de forma definitiva pagando solo el <strong>75%</strong> del fee de búsqueda habitual.</p>
+  </div>
+
+  <a class="cta" href="https://wa.me/5493875488458?text=Hola!%20Ya%20me%20sum%C3%A9%20a%20la%20membres%C3%ADa%20de%20BeeWork%20Hogar%20y%20quiero%20coordinar%20un%20turno." target="_blank" rel="noopener">
+    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"></path><path d="M12.001 2.003a9.999 9.999 0 00-8.647 15.05L2 22l5.062-1.328A9.999 9.999 0 1012 2.003z"></path></svg>
+    Escribinos por WhatsApp
+  </a>
+
+  <div class="footer">
+    <span class="tag">BeeWork Hogar</span>
+    <span>Cuidado que se elige con confianza</span>
+  </div>
+
+</div>
+</body>
+</html>
