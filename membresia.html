@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="light">
+<title>Membresía BeeWork Hogar — Acceso a ayuda puntual verificada</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+--terracota:#C1642F; --terracota-d:#A54F22; --terracota-l:#E8935F;
+--arena:#EFE4D3; --arena-osc:#E4D2B8; --musgo:#8A7A5C; --cafe:#5C4A3A; --cafe-d:#3E3226;
+--card:#FFFDF8; --text:#4A3A2C; --text-dim:#8A7A5C; --line:rgba(92,74,58,0.14);
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{background:var(--arena);color:var(--text);font-family:'Poppins',sans-serif;line-height:1.65;-webkit-font-smoothing:antialiased;}
+.wrap{max-width:920px;margin:0 auto;padding:0 28px;}
+a{color:inherit;}
+img,svg{display:block;max-width:100%;}
+::selection{background:var(--terracota);color:#fff;}
+header{background:rgba(255,253,248,0.92);backdrop-filter:blur(8px);padding:20px 0;border-bottom:1px solid var(--line);position:sticky;top:0;z-index:30;}
+.header-row{display:flex;align-items:center;justify-content:space-between;}
+.brand{display:flex;align-items:center;gap:12px;}
+.brand svg{width:36px;}
+.brand-word{display:flex;flex-direction:column;line-height:1.05;}
+.brand-be{font-weight:700;font-size:14.5px;letter-spacing:1.6px;color:var(--terracota);}
+.brand-ho{font-weight:600;font-size:9.5px;letter-spacing:2.8px;color:var(--cafe);}
+.back-link{font-size:14px;font-weight:600;color:var(--cafe);opacity:0.75;text-decoration:none;}
+.back-link:hover{opacity:1;}
+
+/* HERO */
+.hero{padding:64px 0 48px;text-align:center;}
+.badge-hero{
+display:inline-flex;align-items:center;gap:8px;background:var(--terracota);color:#FFFDF8;
+font-size:13px;font-weight:700;padding:8px 18px;border-radius:999px;margin-bottom:24px;
+}
+h1{font-size:clamp(30px,5vw,44px);font-weight:700;color:var(--cafe);line-height:1.15;margin-bottom:16px;}
+.hero p.lead{font-size:17px;color:var(--text-dim);max-width:560px;margin:0 auto 32px;}
+.price-tag{font-size:52px;font-weight:700;color:var(--terracota);margin-bottom:6px;}
+.price-tag small{font-size:18px;font-weight:500;color:var(--text-dim);}
+.btn-primary{
+background:var(--terracota);color:#FFFDF8;font-weight:600;font-size:15.5px;
+padding:17px 34px;border-radius:999px;text-decoration:none;display:inline-flex;align-items:center;gap:10px;
+box-shadow:0 10px 26px rgba(193,100,47,0.3);transition:transform .18s ease, background .2s ease, box-shadow .2s;
+}
+.btn-primary:hover{background:var(--terracota-d);transform:translateY(-2px);box-shadow:0 14px 30px rgba(193,100,47,0.38);}
+.btn-secondary{
+background:transparent;color:var(--cafe);border:2px solid var(--cafe);font-weight:600;font-size:15px;
+padding:15px 30px;border-radius:999px;text-decoration:none;display:inline-flex;align-items:center;gap:10px;
+transition:background .2s ease, color .2s ease;
+}
+.btn-secondary:hover{background:var(--cafe);color:#FFFDF8;}
+.cta-row{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin-top:28px;}
+
+section{padding:48px 0;}
+.section-title{font-size:12px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:var(--terracota);margin-bottom:12px;}
+h2{font-size:26px;font-weight:600;color:var(--cafe);letter-spacing:-0.3px;margin-bottom:16px;}
+.section-sub{font-size:15px;color:var(--text-dim);max-width:600px;margin-bottom:32px;}
+
+/* QUE INCLUYE */
+.incluye-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:18px;}
+.incluye-card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:24px 22px;}
+.incluye-card .ic{width:38px;height:38px;border-radius:11px;background:var(--arena-osc);display:flex;align-items:center;justify-content:center;margin-bottom:14px;}
+.incluye-card .ic svg{width:20px;height:20px;color:var(--terracota-d);}
+.incluye-card h3{font-size:15.5px;font-weight:600;color:var(--cafe);margin-bottom:6px;}
+.incluye-card p{font-size:13.5px;color:var(--text-dim);}
+
+/* COBROS - tabla */
+.cobros-table{background:var(--card);border:1px solid var(--line);border-radius:18px;overflow:hidden;}
+.cobro-row{display:flex;gap:20px;padding:22px 26px;border-bottom:1px solid var(--line);align-items:flex-start;}
+.cobro-row:last-child{border-bottom:none;}
+.cobro-num{
+flex:0 0 34px;height:34px;border-radius:50%;background:var(--arena-osc);color:var(--cafe);
+font-weight:700;font-size:14px;display:flex;align-items:center;justify-content:center;
+}
+.cobro-body h3{font-size:16px;font-weight:600;color:var(--cafe);margin-bottom:4px;}
+.cobro-body p{font-size:14px;color:var(--text-dim);}
+.cobro-monto{font-weight:700;color:var(--terracota);}
+
+/* TURNOS */
+.turnos-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:18px;}
+.turno-card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:26px;text-align:center;}
+.turno-card .dur{font-size:14px;font-weight:600;color:var(--text-dim);margin-bottom:8px;}
+.turno-card .monto{font-size:32px;font-weight:700;color:var(--terracota);margin-bottom:4px;}
+.turno-card .nota{font-size:12.5px;color:var(--text-dim);}
+
+/* PASAR A FIJO */
+.fijo-card{background:var(--cafe);border-radius:22px;padding:40px 36px;color:var(--arena);}
+.fijo-card .section-title{color:var(--terracota-l);}
+.fijo-card h2{color:#fff;}
+.fijo-compare{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:24px;}
+.fijo-box{border-radius:14px;padding:22px;}
+.fijo-box.antes{background:rgba(255,253,248,0.1);}
+.fijo-box.despues{background:var(--card);}
+.fijo-box .fh{font-size:13px;font-weight:600;margin-bottom:8px;}
+.fijo-box.antes .fh{color:var(--arena-osc);}
+.fijo-box.despues .fh{color:var(--cafe);}
+.fijo-box .fp{font-size:38px;font-weight:700;}
+.fijo-box.antes .fp{color:var(--arena);}
+.fijo-box.despues .fp{color:var(--terracota);}
+.fijo-box .fd{font-size:13px;margin-top:6px;}
+.fijo-box.antes .fd{color:var(--arena-osc);}
+.fijo-box.despues .fd{color:var(--text-dim);}
+
+/* PROMO */
+.promo-card{background:var(--arena-osc);border-radius:18px;padding:28px 30px;display:flex;gap:16px;align-items:flex-start;}
+.promo-card svg{width:26px;height:26px;flex-shrink:0;color:var(--cafe);margin-top:2px;}
+.promo-card p{font-size:14.5px;color:var(--cafe);line-height:1.55;}
+
+/* FAQ */
+.faq-item{border-bottom:1px solid var(--line);padding:20px 0;}
+.faq-item:first-child{padding-top:0;}
+.faq-item h3{font-size:15.5px;font-weight:600;color:var(--cafe);margin-bottom:8px;}
+.faq-item p{font-size:14px;color:var(--text-dim);}
+
+/* CTA FINAL */
+.final-cta{background:var(--card);border:1px solid var(--line);border-radius:24px;padding:48px 36px;text-align:center;}
+.final-cta h2{margin:0 auto 10px;}
+.final-cta p{font-size:15px;color:var(--text-dim);max-width:440px;margin:0 auto 24px;}
+
+footer{background:var(--cafe);padding:44px 0 32px;text-align:center;}
+footer svg{margin:0 auto 14px;width:44px;}
+.footer-brand{color:var(--arena);font-weight:700;letter-spacing:1px;font-size:14px;margin-bottom:10px;}
+footer p{color:var(--arena-osc);font-size:13px;margin-bottom:4px;opacity:0.85;}
+.footer-links{margin-top:16px;font-size:13px;}
+.footer-links a{color:var(--arena);text-decoration:underline;opacity:0.8;}
+
+@media (max-width:720px){
+.incluye-grid{grid-template-columns:1fr;}
+.turnos-grid{grid-template-columns:1fr;}
+.fijo-compare{grid-template-columns:1fr;}
+.cobro-row{flex-direction:column;gap:8px;}
+.final-cta{padding:36px 22px;}
+}
+</style>
+</head>
+<body>
+<header>
+<div class="wrap header-row">
+<div class="brand">
+<svg viewBox="0 0 140 90" xmlns="http://www.w3.org/2000/svg">
+<polygon points="45,8 65,8 75,26 65,44 45,44 35,26" fill="#C1642F"/>
+<polygon points="10,30 30,30 40,48 30,66 10,66 0,48" fill="none" stroke="#5C4A3A" stroke-width="4"/>
+<polygon points="80,30 100,30 110,48 100,66 80,66 70,48" fill="none" stroke="#5C4A3A" stroke-width="4"/>
+<polygon points="45,52 65,52 75,70 65,88 45,88 35,70" fill="#5C4A3A"/>
+</svg>
+<div class="brand-word"><span class="brand-be">BEEWORK</span><span class="brand-ho">HOGAR</span></div>
+</div>
+<a href="familias.html#modalidades" class="back-link">← Volver a modalidades</a>
+</div>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+<div class="wrap">
+<div class="badge-hero">🎉 Primer mes gratis para las primeras 20 familias</div>
+<h1>La membresía que te da acceso<br>a ayuda verificada, cuando la necesites</h1>
+<p class="lead">Una cuota mensual te abre la puerta a nuestra red de trabajadoras evaluadas para cubrir lo puntual — sin tener que armar una búsqueda desde cero cada vez.</p>
+<div class="price-tag">$23.500 <small>/ mes</small></div>
+<div class="cta-row">
+<a id="wa-membresia-hero" class="btn-primary" href="#" target="_blank" rel="noopener">Sumarme a la membresía</a>
+<a href="#como-se-cobra" class="btn-secondary">Ver cómo se cobra</a>
+</div>
+</div>
+</section>
+
+<!-- QUE INCLUYE -->
+<section id="que-incluye">
+<div class="wrap">
+<div class="section-title">Qué incluye</div>
+<h2>Tu membresía te da tres cosas concretas</h2>
+<div class="incluye-grid">
+<div class="incluye-card">
+<div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l3 6 7 1-5 5 1 7-6-3-6 3 1-7-5-5 7-1z"/></svg></div>
+<h3>Turnos eventuales</h3>
+<p>Niñera por una noche, un reemplazo, una changa de limpieza — pedís y coordinamos.</p>
+</div>
+<div class="incluye-card">
+<div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 12l2 2 4-4M12 3l8 4v5c0 5-3.5 9-8 10-4.5-1-8-5-8-10V7l8-4z"/></svg></div>
+<h3>Acceso exclusivo</h3>
+<p>Solo las familias con membresía activa pueden pedir turnos eventuales — no es algo abierto a quienes no la tienen.</p>
+</div>
+<div class="incluye-card">
+<div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2M9 11a4 4 0 100-8 4 4 0 000 8zM23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg></div>
+<h3>Comunidad BeeWork Hogar</h3>
+<p>Un espacio para compartir disponibilidad y experiencias entre familias socias (próximamente).</p>
+</div>
+<div class="incluye-card">
+<div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 2L3 7l9 13 9-13-6-5M3 7h18M12 22V7"/></svg></div>
+<h3>Descuentos con comercios aliados</h3>
+<p>Beneficios en productos para el hogar, cafés y restaurantes seleccionados (próximamente).</p>
+</div>
+</div>
+</div>
+</section>
+
+<!-- COMO SE COBRA -->
+<section id="como-se-cobra" style="background:var(--arena-osc);">
+<div class="wrap">
+<div class="section-title">Cómo se cobra</div>
+<h2>Dos cobros distintos, siempre separados</h2>
+<p class="section-sub">La membresía y el uso de un turno nunca se mezclan en un mismo pago.</p>
+<div class="cobros-table">
+<div class="cobro-row">
+<div class="cobro-num">1</div>
+<div class="cobro-body">
+<h3>Membresía mensual — <span class="cobro-monto">$23.500</span></h3>
+<p>Es el acceso. La pagás una vez al mes, uses o no un turno ese mes.</p>
+</div>
+</div>
+<div class="cobro-row">
+<div class="cobro-num">2</div>
+<div class="cobro-body">
+<h3>Pago a la trabajadora — variable</h3>
+<p>Se lo pagás directo a ella por su turno, según lo que acuerden.</p>
+</div>
+</div>
+<div class="cobro-row">
+<div class="cobro-num">3</div>
+<div class="cobro-body">
+<h3>Comisión de gestión — <span class="cobro-monto">$15.000 (4hs) / $20.000 (8hs)</span></h3>
+<p>Es lo que nos pagás a nosotros por coordinar cada turno. Solo se cobra cuando usás uno.</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+
+<!-- TURNOS -->
+<section id="turnos">
+<div class="wrap">
+<div class="section-title">Turnos eventuales</div>
+<h2>Elegís la duración que necesitás</h2>
+<div class="turnos-grid">
+<div class="turno-card">
+<div class="dur">Turno de 4 horas</div>
+<div class="monto">$15.000</div>
+<div class="nota">Comisión BeeWork — aparte del pago a la trabajadora</div>
+</div>
+<div class="turno-card">
+<div class="dur">Turno de 8 horas</div>
+<div class="monto">$20.000</div>
+<div class="nota">Comisión BeeWork — aparte del pago a la trabajadora</div>
+</div>
+</div>
+</div>
+</section>
+
+<!-- PASAR A FIJO -->
+<section id="pasar-a-fijo">
+<div class="wrap">
+<div class="fijo-card">
+<div class="section-title">¿Y si la persona te funciona muy bien?</div>
+<h2>Pasarla a fijo te sale más barato que buscar de cero</h2>
+<div class="fijo-compare">
+<div class="fijo-box antes">
+<div class="fh">Antes de 3 turnos</div>
+<div class="fp">100%</div>
+<div class="fd">Igual que una búsqueda nueva. No hay atajos.</div>
+</div>
+<div class="fijo-box despues">
+<div class="fh">De 3 a 9 turnos, misma trabajadora</div>
+<div class="fp">75%</div>
+<div class="fd">≈ $352.500 en vez de $470.000.</div>
+</div>
+<div class="fijo-box despues">
+<div class="fh">10 turnos o más, misma trabajadora</div>
+<div class="fp">50%</div>
+<div class="fd">≈ $235.000 en vez de $470.000.</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+
+<!-- PROMO -->
+<section id="promo">
+<div class="wrap">
+<div class="promo-card">
+<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+<p>Sos parte de las primeras 20 familias, así que tu primer mes de membresía es gratis. Después de esa fecha, se activa el cobro mensual normal de $23.500 automáticamente.</p>
+</div>
+</div>
+</section>
+
+<!-- FAQ -->
+<section id="preguntas">
+<div class="wrap">
+<div class="section-title">Preguntas frecuentes</div>
+<h2>Lo que más nos preguntan</h2>
+<div class="faq-item">
+<h3>¿Si no uso ningún turno en el mes, pierdo algo?</h3>
+<p>No perdés nada — pero sí te recomendamos aprovechar al menos un turno en tu primer mes para conocer cómo funciona el servicio.</p>
+</div>
+<div class="faq-item">
+<h3>¿La comisión de gestión cambia según cuánto cobre la trabajadora?</h3>
+<p>No, es un monto fijo por turno ($15.000 para 4hs, $20.000 para 8hs), independiente de lo que acuerdes con ella.</p>
+</div>
+<div class="faq-item">
+<h3>¿Puedo cancelar la membresía cuando quiera?</h3>
+<p>Sí, la suscripción se gestiona desde Mercado Pago y podés cancelarla vos misma en cualquier momento.</p>
+</div>
+<div class="faq-item">
+<h3>¿El descuento del 75%/50% aplica con cualquier trabajadora?</h3>
+<p>Aplica sobre la trabajadora específica con la que ya usaste esos turnos — no es un descuento general para cualquier búsqueda.</p>
+</div>
+<div class="faq-item">
+<h3>¿BeeWork Hogar es el empleador de la trabajadora?</h3>
+<p>No. Somos el nexo que conecta a tu familia con personal verificado — vos sos quien contrata o emplea directamente. Los montos por hora que sugerimos están basados en el convenio vigente (Ley 26.844), pero cada familia puede acordar un valor superior directamente con la persona si lo desea.</p>
+</div>
+</div>
+</section>
+
+<!-- CTA FINAL -->
+<section id="contacto">
+<div class="wrap">
+<div class="final-cta">
+<div class="section-title">Empecemos</div>
+<h2>Sumate a la membresía hoy</h2>
+<p>Activás tu acceso en un par de minutos y aprovechás el primer mes gratis.</p>
+<a id="wa-membresia-final" class="btn-primary" href="#" target="_blank" rel="noopener">Sumarme por WhatsApp</a>
+</div>
+</div>
+</section>
+
+<footer>
+<svg viewBox="0 0 140 90" xmlns="http://www.w3.org/2000/svg">
+<polygon points="45,8 65,8 75,26 65,44 45,44 35,26" fill="#C1642F"/>
+<polygon points="10,30 30,30 40,48 30,66 10,66 0,48" fill="none" stroke="#E4D2B8" stroke-width="4"/>
+<polygon points="80,30 100,30 110,48 100,66 80,66 70,48" fill="none" stroke="#E4D2B8" stroke-width="4"/>
+<polygon points="45,52 65,52 75,70 65,88 45,88 35,70" fill="#E4D2B8"/>
+</svg>
+<div class="footer-brand">BEEWORK HOGAR</div>
+<p>Un servicio de BeeWork SRL</p>
+<p>📞 387 5488458 &nbsp;|&nbsp; ✉️ beeworkhogar@gmail.com</p>
+<p>📷 @beeworkhogar &nbsp;|&nbsp; <a href="https://www.facebook.com/BeeworkHogar" style="color:var(--arena);text-decoration:underline;">Facebook</a></p>
+<div class="footer-links"><a href="familias.html">← Volver a familias</a> &nbsp;·&nbsp; <a href="index.html">Inicio</a> &nbsp;·&nbsp; <a href="aviso-legal.html">Aviso legal</a></div>
+</footer>
+
+<script>
+// Ajustá este número si querés que las consultas de familias lleguen a otro WhatsApp
+const NUMERO_WHATSAPP = '5493875488458';
+const mensajeMembresia = encodeURIComponent('Hola! Quiero sumarme a la membresía de BeeWork Hogar.');
+const linkWa = `https://wa.me/${NUMERO_WHATSAPP}?text=${mensajeMembresia}`;
+document.getElementById('wa-membresia-hero').href = linkWa;
+document.getElementById('wa-membresia-final').href = linkWa;
+</script>
+</body>
+</html>
