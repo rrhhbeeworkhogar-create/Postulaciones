@@ -196,6 +196,28 @@
   .testi-who .tn{font-size:13px;font-weight:600;color:var(--cafe);}
   .testi-who .tr{font-size:11.5px;color:var(--text-dim);}
 
+  /* ===== MEMBRESIA TEASER ===== */
+  .membership-zone{padding:8px 0 52px;}
+  .membership-card{
+    background:var(--cafe);border-radius:24px;padding:40px;color:var(--arena);
+    display:grid;grid-template-columns:1.3fr 0.7fr;gap:30px;align-items:center;max-width:900px;margin:0 auto;
+    position:relative;overflow:hidden;
+  }
+  .membership-badge{
+    display:inline-block;background:var(--terracota);color:#fff;font-size:11.5px;font-weight:700;
+    padding:6px 14px;border-radius:999px;margin-bottom:14px;
+  }
+  .membership-card h2{color:#fff;font-size:22px;margin-bottom:10px;}
+  .membership-card p{color:var(--arena-osc);font-size:14px;line-height:1.6;margin-bottom:0;}
+  .membership-side{text-align:center;border-left:1px solid rgba(239,228,211,0.18);padding-left:26px;}
+  .membership-price{font-size:32px;font-weight:700;color:#fff;}
+  .membership-price small{font-size:13px;font-weight:500;color:var(--arena-osc);display:block;}
+  .membership-side .btn-primary{margin-top:16px;width:100%;justify-content:center;padding:14px 20px;font-size:14.5px;}
+  @media (max-width:720px){
+    .membership-card{grid-template-columns:1fr;text-align:center;padding:32px 26px;}
+    .membership-side{border-left:none;border-top:1px solid rgba(239,228,211,0.18);padding-left:0;padding-top:22px;}
+  }
+
   /* ===== GARANTIA ===== */
   .garantia-zone{padding:52px 0;}
   .garantia-card{
@@ -269,6 +291,7 @@ src="https://www.facebook.com/tr?id=1412505504222087&ev=PageView&noscript=1"
     </div>
     <div style="display:flex;align-items:center;gap:20px;">
       <a href="postularte.html" style="font-size:13.5px;font-weight:600;color:var(--cafe);opacity:0.75;">Busco trabajo</a>
+      <a href="membresia.html" style="font-size:13.5px;font-weight:600;color:var(--cafe);opacity:0.75;">Membresía</a>
       <a href="familias.html" class="topbar-cta">Quiero contratar</a>
     </div>
   </div>
@@ -380,6 +403,26 @@ src="https://www.facebook.com/tr?id=1412505504222087&ev=PageView&noscript=1"
   </div>
 </div>
 
+<!-- ===== MEMBRESIA TEASER ===== -->
+<div class="membership-zone">
+  <div class="wrap">
+    <div class="membership-card rise">
+      <div>
+        <span class="membership-badge">Incluye 1 turno de 4hs</span>
+        <h2>¿Necesitás ayuda solo por unas horas?</h2>
+        <p>Con la membresía accedés a nuestra red verificada para cubrir lo puntual — una niñera por una noche, un reemplazo, una changa de limpieza — sin armar una búsqueda desde cero cada vez.</p>
+      </div>
+      <div class="membership-side">
+        <div class="membership-price">$23.500 <small>por mes</small></div>
+        <a href="membresia.html" class="btn-primary">
+          Conocer la membresía
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+
 <!-- ===== GARANTIA ===== -->
 <div class="garantia-zone">
   <div class="wrap">
@@ -406,6 +449,9 @@ src="https://www.facebook.com/tr?id=1412505504222087&ev=PageView&noscript=1"
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
           Iniciar búsqueda
         </a>
+        <a href="membresia.html" class="btn-outline-white">
+          Conocer la membresía
+        </a>
         <a href="tel:+543875488458" class="btn-outline-white">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
           387 5488458
@@ -423,7 +469,7 @@ src="https://www.facebook.com/tr?id=1412505504222087&ev=PageView&noscript=1"
     &nbsp;|&nbsp; 📷 <a href="https://www.instagram.com/beeworkhogar" target="_blank" rel="noopener">@beeworkhogar</a>
     &nbsp;|&nbsp; <a href="https://www.facebook.com/BeeworkHogar" target="_blank" rel="noopener">Facebook</a>
   </p>
-  <p class="footer-legal"><a href="aviso-legal.html">Aviso legal</a></p>
+  <p class="footer-legal"><a href="membresia.html">Membresía</a> &nbsp;·&nbsp; <a href="aviso-legal.html">Aviso legal</a></p>
 </footer>
 
 </body>
