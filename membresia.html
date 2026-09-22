@@ -159,7 +159,7 @@ footer p{color:var(--arena-osc);font-size:13px;margin-bottom:4px;opacity:0.85;}
 <p class="lead">Una cuota mensual te abre la puerta a nuestra red de trabajadoras evaluadas para cubrir lo puntual — sin tener que armar una búsqueda desde cero cada vez.</p>
 <div class="price-tag">$23.500 <small>/ mes</small></div>
 <div class="cta-row">
-<a id="wa-membresia-hero" class="btn-primary" href="#" target="_blank" rel="noopener">Sumarme a la membresía</a>
+<a class="btn-primary" href="familia-form.html?modalidad=membresia">Sumarme a la membresía</a>
 <a href="#como-se-cobra" class="btn-secondary">Ver cómo se cobra</a>
 </div>
 </div>
@@ -319,7 +319,7 @@ footer p{color:var(--arena-osc);font-size:13px;margin-bottom:4px;opacity:0.85;}
 <div class="section-title">Empecemos</div>
 <h2>Sumate a la membresía hoy</h2>
 <p>Activás tu acceso en un par de minutos y tu primer turno de 4hs va sin cargo de gestión.</p>
-<a id="wa-membresia-final" class="btn-primary" href="#" target="_blank" rel="noopener">Sumarme por WhatsApp</a>
+<a class="btn-primary" href="familia-form.html?modalidad=membresia">Sumarme por WhatsApp</a>
 </div>
 </div>
 </section>
@@ -338,13 +338,5 @@ footer p{color:var(--arena-osc);font-size:13px;margin-bottom:4px;opacity:0.85;}
 <div class="footer-links"><a href="familias.html">← Volver a familias</a> &nbsp;·&nbsp; <a href="index.html">Inicio</a> &nbsp;·&nbsp; <a href="aviso-legal.html">Aviso legal</a></div>
 </footer>
 
-<script>
-// Ajustá este número si querés que las consultas de familias lleguen a otro WhatsApp
-const NUMERO_WHATSAPP = '5493875488458';
-const mensajeMembresia = encodeURIComponent('Hola! Quiero sumarme a la membresía de BeeWork Hogar.');
-const linkWa = `https://wa.me/${NUMERO_WHATSAPP}?text=${mensajeMembresia}`;
-document.getElementById('wa-membresia-hero').href = linkWa;
-document.getElementById('wa-membresia-final').href = linkWa;
-</script>
 </body>
 </html>

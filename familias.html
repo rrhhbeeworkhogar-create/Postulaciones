@@ -276,7 +276,7 @@ Iniciar una búsqueda
 <div class="mi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 13l4 4L19 7"/></svg> Garantía de reemplazo por 30 días</div>
 <div class="mi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 13l4 4L19 7"/></svg> Ideal si necesitás alguien de forma estable</div>
 </div>
-<a id="wa-permanente" class="btn-primary outline" href="#" target="_blank" rel="noopener">Iniciar búsqueda permanente</a>
+<a class="btn-primary outline" href="familia-form.html?modalidad=permanente">Iniciar búsqueda permanente</a>
 </div>
 
 <div class="modalidad-card featured">
@@ -290,7 +290,7 @@ Iniciar una búsqueda
 <div class="mi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 13l4 4L19 7"/></svg> ¿Se adaptó bien? Con 3+ turnos baja a 75%, con 10+ turnos baja a 50%</div>
 </div>
 <a href="membresia.html" class="btn-ghost" style="margin-bottom:2px;">Ver cómo funciona en detalle →</a>
-<a id="wa-membresia" class="btn-primary" href="#" target="_blank" rel="noopener">Sumarme a la membresía</a>
+<a class="btn-primary" href="familia-form.html?modalidad=membresia">Sumarme a la membresía</a>
 </div>
 
 </div>
@@ -424,15 +424,6 @@ Ver modalidades y elegir
 <div class="footer-links"><a href="index.html">← Inicio</a> &nbsp;·&nbsp; <a href="membresia.html">Membresía</a> &nbsp;·&nbsp; <a href="postularte.html">¿Buscás trabajo? Postulate acá →</a> &nbsp;·&nbsp; <a href="aviso-legal.html">Aviso legal</a></div>
 </footer>
 
-<script>
-// Ajustá este número si querés que las consultas de familias lleguen a otro WhatsApp
-const NUMERO_WHATSAPP = '5493875488458';
 
-const mensajePermanente = encodeURIComponent('Hola! Quiero iniciar una búsqueda permanente con BeeWork Hogar. Necesito: ');
-document.getElementById('wa-permanente').href = `https://wa.me/${NUMERO_WHATSAPP}?text=${mensajePermanente}`;
-
-const mensajeMembresia = encodeURIComponent('Hola! Quiero sumarme a la membresía de BeeWork Hogar.');
-document.getElementById('wa-membresia').href = `https://wa.me/${NUMERO_WHATSAPP}?text=${mensajeMembresia}`;
-</script>
 </body>
 </html>
