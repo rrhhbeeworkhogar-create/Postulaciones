@@ -1,0 +1,925 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Screening telefónico · BeeWork Hogar</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --terracota: #C1642F;
+    --terracota-claro: #F6E7DB;
+    --cafe: #5C4A3A;
+    --cafe-suave: #8A7664;
+    --arena: #EFE4D3;
+    --arena-osc: #E4D2B8;
+    --blanco: #FFFDF9;
+    --verde: #4F7A4A;
+    --verde-claro: #E3EEDD;
+    --amarillo-claro: #FBF0CF;
+    --rojo: #A63D2F;
+    --rojo-claro: #F6DCD6;
+    --radio: 14px;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: 'Poppins', sans-serif;
+    background: var(--arena);
+    color: var(--cafe);
+    font-size: 15px;
+    line-height: 1.55;
+  }
+  .contenedor { max-width: 760px; margin: 0 auto; padding: 20px 16px 120px; }
+  header { display: flex; align-items: center; gap: 14px; margin-bottom: 18px; }
+  header svg { width: 56px; height: 46px; flex-shrink: 0; }
+  .marca { font-weight: 700; letter-spacing: 0.08em; font-size: 13px; color: var(--terracota); }
+  h1 { margin: 0; font-size: 22px; line-height: 1.25; }
+  .tarjeta {
+    background: var(--blanco);
+    border-radius: var(--radio);
+    padding: 20px;
+    margin-bottom: 16px;
+    box-shadow: 0 1px 3px rgba(92, 74, 58, 0.10);
+  }
+  .tarjeta h2 { margin: 0 0 4px; font-size: 18px; display: flex; align-items: center; gap: 10px; }
+  .num {
+    display: inline-flex; align-items: center; justify-content: center;
+    width: 28px; height: 28px; border-radius: 50%;
+    background: var(--terracota); color: var(--blanco);
+    font-size: 14px; font-weight: 600; flex-shrink: 0;
+  }
+  .sub { color: var(--cafe-suave); font-size: 13px; margin: 0 0 14px; }
+  .leer {
+    background: var(--arena-osc);
+    border-left: 4px solid var(--terracota);
+    border-radius: 8px;
+    padding: 12px 14px;
+    margin: 10px 0 12px;
+    font-size: 15px;
+  }
+  .leer::before { content: "🗣️ Leé en voz alta"; display: block; font-size: 12px; font-weight: 600; color: var(--terracota); margin-bottom: 4px; }
+  .tip { font-size: 13px; color: var(--cafe-suave); margin: 6px 0 10px; }
+  .tip b { color: var(--cafe); }
+  ul.lista { margin: 6px 0 0; padding-left: 20px; }
+  ul.lista li { margin-bottom: 4px; }
+  .pregunta { border-top: 1px solid var(--arena-osc); padding-top: 16px; margin-top: 16px; }
+  .pregunta:first-of-type { border-top: none; padding-top: 0; margin-top: 4px; }
+  .pregunta-titulo { font-weight: 600; margin-bottom: 2px; }
+  .opciones { display: flex; flex-direction: column; gap: 8px; margin-top: 8px; }
+  .opciones.fila { flex-direction: row; flex-wrap: wrap; }
+  .opciones.fila .opt { flex: 1 1 140px; }
+  .opt {
+    display: flex; gap: 10px; align-items: flex-start;
+    border: 1.5px solid var(--arena-osc);
+    border-radius: 10px;
+    padding: 10px 12px;
+    cursor: pointer;
+    background: var(--blanco);
+    transition: border-color 0.15s, background 0.15s;
+  }
+  .opt:hover { border-color: var(--terracota); }
+  .opt input { margin-top: 4px; accent-color: var(--terracota); flex-shrink: 0; }
+  .opt.sel { border-color: var(--terracota); background: var(--terracota-claro); }
+  .opt-t { font-weight: 500; }
+  .opt-d { display: block; font-size: 13px; color: var(--cafe-suave); }
+  label.campo { display: block; font-weight: 500; font-size: 14px; margin: 12px 0 4px; }
+  input[type=text], input[type=tel], input[type=password], select, textarea {
+    width: 100%;
+    font-family: inherit; font-size: 15px; color: var(--cafe);
+    border: 1.5px solid var(--arena-osc); border-radius: 10px;
+    padding: 10px 12px; background: var(--blanco);
+  }
+  input:focus, select:focus, textarea:focus { outline: none; border-color: var(--terracota); }
+  textarea { min-height: 80px; resize: vertical; }
+  .fila-campos { display: flex; gap: 12px; flex-wrap: wrap; }
+  .fila-campos > div { flex: 1 1 200px; }
+  .dni-fila { display: flex; gap: 8px; }
+  .dni-fila input { flex: 1; }
+  button {
+    font-family: inherit; font-size: 15px; font-weight: 600;
+    border: none; border-radius: 10px; padding: 11px 18px; cursor: pointer;
+  }
+  .btn { background: var(--terracota); color: var(--blanco); }
+  .btn:hover { background: #A9542A; }
+  .btn:disabled { opacity: 0.6; cursor: wait; }
+  .btn-sec { background: var(--arena-osc); color: var(--cafe); }
+  .btn-sec:hover { background: #D9C3A4; }
+  .aviso { border-radius: 10px; padding: 12px 14px; margin-top: 12px; font-size: 14px; }
+  .aviso.ok { background: var(--verde-claro); color: var(--verde); }
+  .aviso.warn { background: var(--amarillo-claro); color: var(--cafe); }
+  .aviso.mal { background: var(--rojo-claro); color: var(--rojo); }
+  .oculto { display: none !important; }
+  .checks label { display: flex; gap: 10px; align-items: flex-start; padding: 8px 0; cursor: pointer; }
+  .checks input { margin-top: 5px; accent-color: var(--terracota); }
+  .resumen-total { display: flex; align-items: baseline; gap: 8px; margin: 6px 0 2px; }
+  .resumen-total .grande { font-size: 44px; font-weight: 700; color: var(--terracota); line-height: 1; }
+  .resultado { display: inline-block; font-weight: 600; padding: 6px 14px; border-radius: 999px; margin: 6px 0 12px; }
+  .resultado.r-ok { background: var(--verde-claro); color: var(--verde); }
+  .resultado.r-res { background: var(--amarillo-claro); color: var(--cafe); }
+  .resultado.r-no { background: var(--rojo-claro); color: var(--rojo); }
+  table.sub-tabla { width: 100%; border-collapse: collapse; font-size: 14px; }
+  table.sub-tabla td { padding: 6px 0; border-bottom: 1px solid var(--arena-osc); }
+  table.sub-tabla td:last-child { text-align: right; font-weight: 600; }
+  .barra {
+    position: fixed; left: 0; right: 0; bottom: 0;
+    background: var(--cafe); color: var(--arena);
+    padding: 10px 16px; font-size: 13px; z-index: 10;
+  }
+  .barra-in { max-width: 760px; margin: 0 auto; display: flex; align-items: center; gap: 12px; }
+  .progreso { flex: 1; height: 8px; background: rgba(239, 228, 211, 0.25); border-radius: 999px; overflow: hidden; }
+  .progreso div { height: 100%; width: 0; background: var(--terracota); transition: width 0.2s; }
+  .faq dt { font-weight: 600; margin-top: 10px; }
+  .faq dd { margin: 2px 0 0; }
+  @media (max-width: 480px) {
+    h1 { font-size: 19px; }
+    .tarjeta { padding: 16px; }
+  }
+</style>
+</head>
+<body>
+<div class="contenedor">
+
+  <header>
+    <svg viewBox="-50 -40 100 80" aria-hidden="true">
+      <polygon points="-12,0 -21,15.59 -39,15.59 -48,0 -39,-15.59 -21,-15.59" fill="none" stroke="#5C4A3A" stroke-width="3"/>
+      <polygon points="18,-17.32 9,-1.73 -9,-1.73 -18,-17.32 -9,-32.91 9,-32.91" fill="#C1642F"/>
+      <polygon points="18,17.32 9,32.91 -9,32.91 -18,17.32 -9,1.73 9,1.73" fill="#5C4A3A"/>
+      <polygon points="48,0 39,15.59 21,15.59 12,0 21,-15.59 39,-15.59" fill="none" stroke="#5C4A3A" stroke-width="3"/>
+    </svg>
+    <div>
+      <div class="marca">BEEWORK HOGAR</div>
+      <h1>Guía de screening telefónico</h1>
+    </div>
+  </header>
+
+  <!-- ANTES DE LLAMAR -->
+  <section class="tarjeta">
+    <h2>📋 Antes de llamar</h2>
+    <p class="sub">Leé esto una vez. La guía te va a ir diciendo qué decir y qué marcar en cada paso.</p>
+    <ul class="lista">
+      <li>Buscá un lugar tranquilo y reservá unos 15 minutos.</li>
+      <li>Seguí la guía en orden: leé en voz alta los textos marcados con 🗣️ y marcá la opción que más se parezca a lo que responde la postulante.</li>
+      <li>No hace falta que la respuesta sea idéntica: elegí la opción más parecida. Si dudás entre dos, elegí la de menor puntaje.</li>
+      <li><b>No prometas trabajo</b> ni le digas el resultado en la llamada.</li>
+      <li><b>Nunca preguntes</b> por estado civil, hijos, embarazo, religión, origen, orientación sexual ni ideas políticas. No tienen que ver con el trabajo.</li>
+    </ul>
+    <label class="campo" for="clave">Clave de acceso</label>
+    <input type="password" id="clave" autocomplete="off" placeholder="Te la pasa la Dirección">
+  </section>
+
+  <!-- 1. DATOS -->
+  <section class="tarjeta">
+    <h2><span class="num">1</span>Datos de la llamada</h2>
+    <p class="sub">Si la postulante ya está en la base, escribí el DNI y tocá "Buscar" para completar los datos solos.</p>
+
+    <div class="fila-campos">
+      <div>
+        <label class="campo" for="evaluador">Tu nombre</label>
+        <input type="text" id="evaluador" autocomplete="name">
+      </div>
+      <div>
+        <label class="campo" for="dni">DNI de la postulante</label>
+        <div class="dni-fila">
+          <input type="tel" id="dni" inputmode="numeric" placeholder="Sin puntos">
+          <button type="button" class="btn-sec" id="btnBuscar">Buscar</button>
+        </div>
+      </div>
+    </div>
+    <div id="avisoBusqueda"></div>
+
+    <div class="fila-campos">
+      <div>
+        <label class="campo" for="nombre">Nombre y apellido</label>
+        <input type="text" id="nombre">
+      </div>
+      <div>
+        <label class="campo" for="telefono">Teléfono / WhatsApp</label>
+        <input type="tel" id="telefono">
+      </div>
+    </div>
+    <div class="fila-campos">
+      <div>
+        <label class="campo" for="zona">Barrio o zona donde vive</label>
+        <input type="text" id="zona">
+      </div>
+      <div>
+        <label class="campo" for="estado">Resultado de la llamada</label>
+        <select id="estado">
+          <option value="Completada">Atendió y hicimos la entrevista</option>
+          <option value="No atendió">No atendió</option>
+          <option value="Pidió reprogramar">Pidió que la llamemos otro día</option>
+          <option value="No le interesa">Ya no le interesa</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="pregunta">
+      <div class="pregunta-titulo">¿Para qué rol es la entrevista?</div>
+      <div class="tip">Si se postuló a más de uno, elegí el principal. Las preguntas de la sección 6 cambian según el rol.</div>
+      <div class="opciones fila" id="opcRol">
+        <label class="opt"><input type="radio" name="rol" value="ninera"><span class="opt-t">Niñera</span></label>
+        <label class="opt"><input type="radio" name="rol" value="acompanante"><span class="opt-t">Acompañante de adultos mayores</span></label>
+        <label class="opt"><input type="radio" name="rol" value="casas"><span class="opt-t">Personal de casas particulares</span></label>
+      </div>
+    </div>
+    <div class="aviso warn oculto" id="avisoNoCompletada">Como la entrevista no se hizo, alcanza con estos datos. Bajá hasta el final y tocá "Guardar en la planilla".</div>
+  </section>
+
+  <div id="cuerpoEntrevista">
+
+    <!-- 2. APERTURA -->
+    <section class="tarjeta">
+      <h2><span class="num">2</span>Apertura</h2>
+      <div class="leer">Hola, ¿hablo con <span class="ph-nombre">[nombre]</span>? Te llamo de BeeWork Hogar por tu postulación como <span class="ph-rol">[rol]</span>. ¿Tenés unos 15 minutos para charlar ahora? Te voy a hacer algunas preguntas y voy a ir tomando nota.</div>
+      <div class="tip"><b>Si no puede hablar ahora:</b> preguntale qué día y horario le queda bien, anotalo en Observaciones y cambiá "Resultado de la llamada" a "Pidió que la llamemos otro día".</div>
+    </section>
+
+    <!-- 3. FILTROS -->
+    <section class="tarjeta">
+      <h2><span class="num">3</span>Requisitos excluyentes</h2>
+      <p class="sub">Si alguna respuesta es "No", la postulante no avanza. La guía te lo va a avisar.</p>
+      <div id="bloqueFiltros"></div>
+      <div class="aviso mal oculto" id="avisoKO">⛔ La postulante no cumple un requisito excluyente. No sigas con las preguntas: pasá directo al <b>cierre</b> (sección 10), agradecé y cortá con amabilidad.</div>
+    </section>
+
+    <div id="seccionesPuntaje">
+      <!-- 4. EXPERIENCIA -->
+      <section class="tarjeta">
+        <h2><span class="num">4</span>Experiencia</h2>
+        <div id="bloqueExperiencia"></div>
+      </section>
+
+      <!-- 5. DISPONIBILIDAD -->
+      <section class="tarjeta">
+        <h2><span class="num">5</span>Disponibilidad</h2>
+        <div id="bloqueDisponibilidad"></div>
+      </section>
+
+      <!-- 6. SITUACIONES -->
+      <section class="tarjeta">
+        <h2><span class="num">6</span>Situaciones</h2>
+        <p class="sub">Leé cada situación y dejala responder con sus palabras. Después marcá la opción que más se parezca a lo que dijo.</p>
+        <div id="bloqueSituaciones"><div class="aviso warn">Elegí el rol en la sección 1 para ver las situaciones.</div></div>
+      </section>
+
+      <!-- 7. DOCUMENTACION -->
+      <section class="tarjeta">
+        <h2><span class="num">7</span>Documentación y formación</h2>
+        <div id="bloqueDocumentacion"></div>
+      </section>
+
+      <!-- 8. COMUNICACION -->
+      <section class="tarjeta">
+        <h2><span class="num">8</span>Tu impresión de la llamada</h2>
+        <p class="sub">Esto no se pregunta: lo completás vos según cómo fue la conversación.</p>
+        <div id="bloqueComunicacion"></div>
+      </section>
+
+      <!-- 9. ALERTAS -->
+      <section class="tarjeta">
+        <h2><span class="num">9</span>Señales de alerta</h2>
+        <p class="sub">Marcá solo lo que notaste de verdad. Una respuesta "preocupante" en la sección 6 ya cuenta como alerta automáticamente.</p>
+        <div class="checks" id="bloqueAlertas"></div>
+      </section>
+    </div>
+
+    <!-- 10. CIERRE -->
+    <section class="tarjeta">
+      <h2><span class="num">10</span>Preguntas de la postulante y cierre</h2>
+      <div class="leer">¿Tenés alguna pregunta para nosotros?</div>
+      <div class="tip"><b>Respuestas para las preguntas más comunes:</b></div>
+      <dl class="faq">
+        <dt>¿Cuánto se paga?</dt>
+        <dd>"El pago lo acordás directamente con cada familia, según el trabajo y las horas."</dd>
+        <dt>¿Cuándo empiezo?</dt>
+        <dd>"Depende de los pedidos de las familias. Si tu perfil avanza, te escribimos con los próximos pasos."</dd>
+        <dt>¿Tengo que pagar algo?</dt>
+        <dd>"No, postularte en BeeWork Hogar no tiene ningún costo."</dd>
+        <dt>Otra pregunta que no sabés responder</dt>
+        <dd>"Lo consulto con el equipo y te respondemos por WhatsApp." Anotala en Observaciones.</dd>
+      </dl>
+      <div class="leer">¡Muchas gracias por tu tiempo, <span class="ph-nombre">[nombre]</span>! Vamos a revisar tu postulación y te escribimos por WhatsApp con los próximos pasos. ¡Que tengas un lindo día!</div>
+      <div class="aviso warn oculto" id="avisoTest">📝 Esta postulante todavía no hizo el test psicotécnico. Antes de cortar, pedile que lo complete: <b>beeworkhogar.com/test.html</b></div>
+    </section>
+
+  </div>
+
+  <!-- 11. RESUMEN -->
+  <section class="tarjeta">
+    <h2><span class="num">11</span>Observaciones y resultado</h2>
+    <label class="campo" for="observaciones">Observaciones</label>
+    <textarea id="observaciones" placeholder="Todo lo que te parezca importante: dudas, horarios para reprogramar, preguntas que hizo..."></textarea>
+
+    <div id="resumen">
+      <div class="resumen-total"><span class="grande" id="totalNum">0</span><span>/ 100 puntos</span></div>
+      <div class="resultado" id="resultadoTag">Sin completar</div>
+      <table class="sub-tabla">
+        <tr><td>Experiencia</td><td id="stExp">0 / 25</td></tr>
+        <tr><td>Disponibilidad</td><td id="stDis">0 / 20</td></tr>
+        <tr><td>Situaciones</td><td id="stSit">0 / 30</td></tr>
+        <tr><td>Documentación y formación</td><td id="stDoc">0 / 10</td></tr>
+        <tr><td>Impresión de la llamada</td><td id="stCom">0 / 15</td></tr>
+        <tr><td>Señales de alerta</td><td id="stAle">0</td></tr>
+      </table>
+      <p class="tip"><b>Cómo se decide:</b> 75 puntos o más y ninguna alerta = Recomendada (pasa a entrevista con la Coordinadora). Entre 55 y 74, o con una alerta = En reserva. Menos de 55, dos alertas o más, o un requisito excluyente no cumplido = No avanza.</p>
+    </div>
+
+    <div id="avisoEnvio"></div>
+    <div style="display:flex; gap:10px; flex-wrap:wrap; margin-top:14px;">
+      <button type="button" class="btn" id="btnGuardar">Guardar en la planilla</button>
+      <button type="button" class="btn-sec oculto" id="btnNueva">Empezar una nueva entrevista</button>
+    </div>
+  </section>
+
+</div>
+
+<div class="barra">
+  <div class="barra-in">
+    <span id="barraTexto">0% completado</span>
+    <div class="progreso"><div id="barraProg"></div></div>
+  </div>
+</div>
+
+<script>
+// =====================================================================
+// CONFIGURACIÓN: pegá acá la URL del Apps Script (termina en /exec)
+// =====================================================================
+const API_URL = 'https://script.google.com/macros/s/AKfycby1ItyrMkB7lpfnGblhUf44mg1KQIXvS9v7etInukkmUuHh54QzwbH8DCgspHqBB4hhLw/exec';
+
+const ROLES = {
+  ninera: 'niñera',
+  acompanante: 'acompañante de adultos mayores',
+  casas: 'personal de casas particulares'
+};
+
+// ---------------------------------------------------------------------
+// Requisitos excluyentes (Sí / No)
+// ---------------------------------------------------------------------
+const FILTROS = [
+  { id: 'k_antecedentes', leer: 'Para trabajar con familias pedimos el certificado de antecedentes penales. ¿Podés presentarlo?', titulo: 'Puede presentar el certificado de antecedentes' },
+  { id: 'k_modelo', leer: 'Te cuento cómo trabajamos: BeeWork Hogar conecta a postulantes con familias. La relación de trabajo es directamente con la familia, y la familia te paga a vos directamente. BeeWork no es tu empleador. ¿Estás de acuerdo con trabajar así?', titulo: 'Acepta que la relación y el pago son directos con la familia', tip: 'Si tiene dudas, repetí la explicación con calma. Marcá "Sí" solo si entendió y está de acuerdo.' },
+  { id: 'k_checkin', leer: 'En cada trabajo te vamos a pedir que nos avises por WhatsApp cuando llegás y cuando te retirás. Es por tu seguridad. ¿Estás de acuerdo?', titulo: 'Acepta avisar al llegar y al retirarse' }
+];
+
+// ---------------------------------------------------------------------
+// Preguntas con puntaje. p = puntos de cada opción.
+// ---------------------------------------------------------------------
+const EXPERIENCIA = [
+  { id: 'e_tiempo', leer: '¿Cuánto tiempo trabajaste como {rol}?', titulo: 'Tiempo de experiencia en el rol',
+    opciones: [
+      { t: 'Sin experiencia', p: 0 },
+      { t: 'Menos de 1 año', p: 4 },
+      { t: 'Entre 1 y 3 años', p: 8 },
+      { t: 'Más de 3 años', p: 12 }
+    ] },
+  { id: 'e_donde', leer: '¿Dónde trabajaste? ¿Para quién?', titulo: 'Dónde trabajó',
+    opciones: [
+      { t: 'Solo con su propia familia', d: 'Cuidó a familiares o ayudó en su casa, pero no trabajó para otros.', p: 1 },
+      { t: 'Para otras familias o en instituciones', d: 'Casas de familia, jardines, geriátricos, empresas de limpieza, etc.', p: 5 }
+    ] },
+  { id: 'e_ref', leer: '¿Nos podrías pasar el contacto de alguien para quien hayas trabajado, para pedir una referencia?', titulo: 'Referencias que puede dar',
+    nota: { id: 'referencias', label: 'Nombre y teléfono de las referencias' },
+    opciones: [
+      { t: 'No tiene referencias', p: 0 },
+      { t: 'Una referencia', p: 4 },
+      { t: 'Dos o más referencias', p: 8 }
+    ] }
+];
+
+const DISPONIBILIDAD = [
+  { id: 'd_dias', leer: '¿Qué días y en qué horarios podés trabajar?', titulo: 'Días y horarios disponibles',
+    nota: { id: 'horarios', label: 'Detalle de días y horarios' },
+    opciones: [
+      { t: 'Poca disponibilidad', d: '1 o 2 días, o solo algunas horas sueltas.', p: 2 },
+      { t: 'Disponibilidad media', d: '3 o 4 días a la semana.', p: 5 },
+      { t: 'Mucha disponibilidad', d: '5 días o más, en distintos horarios.', p: 8 }
+    ] },
+  { id: 'd_aviso', leer: 'Si una familia necesita a alguien para mañana, ¿podrías tomar un trabajo con 24 horas de aviso?', titulo: 'Puede tomar trabajos con poco aviso',
+    opciones: [
+      { t: 'No', p: 0 },
+      { t: 'A veces, depende del día', p: 3 },
+      { t: 'Sí', p: 6 }
+    ] },
+  { id: 'd_movilidad', leer: '¿Cómo te movés? ¿Podés llegar a cualquier barrio de Salta Capital?', titulo: 'Movilidad',
+    opciones: [
+      { t: 'Le cuesta llegar a algunas zonas', p: 1 },
+      { t: 'En colectivo, sin problemas', p: 4 },
+      { t: 'Tiene vehículo propio', p: 6 }
+    ] }
+];
+
+const ANCLAS = ['Muy buena', 'Aceptable', 'Preocupante'];
+const PUNTOS_SIT = [10, 6, 0];
+
+const SITUACIONES = {
+  ninera: [
+    { id: 's1', leer: 'Estás cuidando a un nene de 3 años. Se cae, se golpea la cabeza y llora mucho. ¿Qué hacés?', titulo: 'Golpe en la cabeza',
+      anclas: [
+        'Lo contiene y lo calma, revisa el golpe y avisa enseguida a la familia. Si ve algo raro (vómitos, mucho sueño, sangrado) llama a emergencias.',
+        'Lo calma y le pone hielo, avisa a la familia, pero no menciona señales de alarma ni emergencias.',
+        'No avisa a la familia, le resta importancia o dice que lo resolvería sin contar nada.'
+      ] },
+    { id: 's2', leer: 'Tocan el timbre. Es una persona que dice ser la tía de los niños y quiere llevarlos a pasear. La familia no te avisó nada. ¿Qué hacés?', titulo: 'Persona que quiere llevarse a los niños',
+      anclas: [
+        'No le abre ni le entrega a los niños. Llama a la familia para confirmar y hace solo lo que la familia le indique.',
+        'Duda, pero termina llamando a la familia antes de decidir.',
+        'Deja pasar a la persona o le entrega a los niños sin confirmar con la familia.'
+      ] },
+    { id: 's3', leer: 'El nene tiene un berrinche fuerte porque no quiere bañarse ni comer. ¿Cómo lo manejás?', titulo: 'Berrinche',
+      anclas: [
+        'Mantiene la calma, pone límites con paciencia, ofrece opciones o lo distrae, y respeta las pautas de la familia.',
+        'Lo resuelve, pero sin un criterio claro: cede en todo o insiste sin estrategia.',
+        'Menciona gritos, castigos, encerrarlo o cualquier tipo de maltrato.'
+      ] },
+    { id: 's4', leer: 'Te toca una tarde de 4 horas con un nene de 5 años. ¿Qué harías con él durante ese tiempo?', titulo: 'Juego y estimulación',
+      anclas: [
+        'Propone actividades concretas según la edad (juegos, cuentos, dibujo, manualidades, juego al aire libre), juega con el nene y limita las pantallas a lo que indique la familia.',
+        'Menciona algún juego pero en forma general, o lo deja jugar solo mientras lo mira.',
+        'Lo pondría a ver la tele o el celular la mayor parte del tiempo, o no se le ocurre qué hacer.'
+      ] },
+    { id: 's5', leer: 'Cuidás a un bebé de 1 año y a un nene de 4 durante toda la tarde. ¿Qué cuidados de higiene tenés con ellos?', titulo: 'Higiene',
+      anclas: [
+        'Cambia el pañal seguido y lo revisa cada tanto aunque el bebé no llore, les lava las manos antes de comer y después del baño, les cepilla los dientes después de comer y sigue las rutinas de la familia.',
+        'Menciona cambiar pañales o lavar las manos, pero no habla de los dientes, o lo hace solo si la familia se lo pide.',
+        'Espera a que el bebé llore o a que vuelva la familia para cambiarlo, o no menciona la higiene.'
+      ] }
+  ],
+  acompanante: [
+    { id: 's1', leer: 'La persona que acompañás se cae en el baño. ¿Qué hacés?', titulo: 'Caída',
+      anclas: [
+        'No la levanta de golpe: le pregunta cómo está y si tiene dolor. Si hay dolor fuerte o golpe en la cabeza llama a emergencias. Avisa a la familia.',
+        'La ayuda a levantarse con cuidado y avisa a la familia, pero no revisa si hay una lesión.',
+        'La levanta sin revisar nada, no avisa a la familia u oculta lo que pasó.'
+      ] },
+    { id: 's2', leer: 'La persona se niega a tomar la medicación que te dejó indicada la familia. ¿Qué hacés?', titulo: 'Rechazo de la medicación',
+      anclas: [
+        'Insiste con paciencia y pregunta por qué no quiere. Nunca la obliga ni se la esconde en la comida sin autorización. Avisa a la familia.',
+        'Insiste un poco y después avisa a la familia.',
+        'La obliga, se la da escondida sin permiso o la deja pasar sin avisar.'
+      ] },
+    { id: 's3', leer: 'La persona está confundida, no te reconoce y te pide irse de la casa. ¿Cómo actuás?', titulo: 'Confusión',
+      anclas: [
+        'Mantiene la calma, le habla tranquilo, la orienta sin discutir, no la deja salir sola y avisa a la familia.',
+        'Logra calmarla, pero no avisa a la familia, o discute con ella para convencerla.',
+        'Se enoja, la encierra o la sujeta, o la deja salir sola.'
+      ] },
+    { id: 's4', leer: 'Pasás una tarde con una persona mayor que está bien de salud pero pasa mucho tiempo sola. ¿Qué harías para que esa tarde sea buena para ella?', titulo: 'Compañía y estimulación',
+      anclas: [
+        'Propone actividades concretas: conversar y preguntarle por su historia, juegos de mesa o cartas, leer, escuchar música, salir a caminar, cosas que a la persona le gusten.',
+        'La acompaña y conversa un rato, pero sin actividades concretas.',
+        'La dejaría mirando la tele, se pondría con el celular o solo haría las tareas de la casa.'
+      ] },
+    { id: 's5', leer: 'Acompañás a una persona mayor que usa pañal y necesita ayuda con su higiene. ¿Cómo lo manejás?', titulo: 'Higiene',
+      anclas: [
+        'Revisa y cambia el pañal con frecuencia para evitar irritaciones y escaras, la higieniza bien, cuida su intimidad (le explica qué va a hacer, la tapa), la ayuda con el cepillado de dientes o la limpieza de la prótesis, y sigue las indicaciones de la familia.',
+        'La cambia cuando hace falta, pero no menciona la prevención, los dientes o la prótesis, ni el cuidado de su intimidad.',
+        'Esperaría a que venga la familia, le da vergüenza o se niega a hacerlo, o la trataría sin cuidado.'
+      ] }
+  ],
+  casas: [
+    { id: 's1', leer: 'Mientras limpiás, rompés sin querer un objeto que parece valioso. ¿Qué hacés?', titulo: 'Algo roto',
+      anclas: [
+        'Avisa enseguida a la familia y cuenta con sinceridad lo que pasó.',
+        'Avisa, pero recién cuando le preguntan o al final del día.',
+        'Lo esconde, lo tira o no dice nada.'
+      ] },
+    { id: 's2', leer: 'Encontrás dinero o una joya fuera de lugar, por ejemplo debajo de un mueble. ¿Qué hacés?', titulo: 'Objeto de valor fuera de lugar',
+      anclas: [
+        'Lo deja a la vista en un lugar seguro y le avisa a la familia.',
+        'Lo guarda donde le parece y lo comenta después.',
+        'Duda, dice que depende o que se lo quedaría.'
+      ] },
+    { id: 's3', leer: 'La familia te pide una tarea que no estaba acordada, por ejemplo cuidar a los niños además de limpiar. ¿Qué respondés?', titulo: 'Tarea no acordada',
+      anclas: [
+        'Responde con respeto que eso no estaba acordado y propone consultarlo con BeeWork para acordarlo bien.',
+        'Lo hace igual sin decir nada, aunque no le corresponda.',
+        'Se enoja o responde de mala manera.'
+      ] }
+  ]
+};
+
+const DOCUMENTACION = [
+  { id: 'doc_antecedentes', leer: '¿Ya tenés el certificado de antecedentes penales?', titulo: 'Certificado de antecedentes',
+    opciones: [
+      { t: 'No lo tiene, pero lo puede tramitar', p: 2 },
+      { t: 'Ya lo tiene', p: 4 }
+    ] },
+  { id: 'doc_curso', leer: '¿Hiciste algún curso relacionado con el trabajo? Por ejemplo primeros auxilios, cuidador domiciliario o asistente maternal.', titulo: 'Cursos o capacitaciones',
+    nota: { id: 'cursos', label: '¿Qué curso hizo?' },
+    opciones: [
+      { t: 'No', p: 0 },
+      { t: 'Sí', p: 3 }
+    ] },
+  { id: 'doc_vacunas', leer: '¿Tenés las vacunas al día?', titulo: 'Vacunas',
+    tip: 'Es un requisito para trabajar con niños y adultos mayores. No preguntes por otras cuestiones de salud.',
+    opciones: [
+      { t: 'No', p: 0 },
+      { t: 'No sabe', p: 1 },
+      { t: 'Sí', p: 3 }
+    ] }
+];
+
+const COMUNICACION = [
+  { id: 'c_claridad', titulo: '¿Se expresa con claridad?',
+    opciones: [
+      { t: 'Poco', d: 'Cuesta entenderla o responde con palabras sueltas.', p: 1 },
+      { t: 'Bastante', d: 'Se entiende bien, con alguna dificultad.', p: 3 },
+      { t: 'Mucho', d: 'Se expresa con claridad y orden.', p: 5 }
+    ] },
+  { id: 'c_escucha', titulo: '¿Escucha y responde lo que se le pregunta?',
+    opciones: [
+      { t: 'Poco', d: 'Se va por las ramas o responde otra cosa.', p: 1 },
+      { t: 'Bastante', d: 'En general responde lo que se le pregunta.', p: 3 },
+      { t: 'Mucho', d: 'Escucha con atención y responde justo lo que se le pregunta.', p: 5 }
+    ] },
+  { id: 'c_actitud', titulo: '¿Mostró interés y buena actitud?',
+    opciones: [
+      { t: 'Poco', d: 'Desganada, apurada o poco interesada.', p: 1 },
+      { t: 'Bastante', d: 'Amable e interesada.', p: 3 },
+      { t: 'Mucho', d: 'Muy motivada, cálida y con ganas de trabajar.', p: 5 }
+    ] }
+];
+
+const ALERTAS = [
+  { id: 'a_contradice', t: 'Se contradijo en sus respuestas' },
+  { id: 'a_hablamal', t: 'Habló mal de familias o empleadores anteriores' },
+  { id: 'a_adelantos', t: 'Pidió adelantos de dinero o condiciones fuera de lo normal' },
+  { id: 'a_actitud', t: 'Se mostró agresiva o impaciente en la llamada' },
+  { id: 'a_referencias', t: 'No quiso dar referencias sin un motivo claro' }
+];
+
+// =====================================================================
+// Utilidades
+// =====================================================================
+const $ = (id) => document.getElementById(id);
+const esc = (s) => String(s).replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+const normalizar = (s) => String(s || '').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+
+function guardarLocal(k, v) { try { localStorage.setItem(k, v); } catch (e) {} }
+function leerLocal(k) { try { return localStorage.getItem(k) || ''; } catch (e) { return ''; } }
+
+function rolActual() {
+  const r = document.querySelector('input[name="rol"]:checked');
+  return r ? r.value : '';
+}
+
+function htmlPregunta(q) {
+  const leer = q.leer ? `<div class="leer">${esc(q.leer).replace('{rol}', '<span class="ph-rol">[rol]</span>')}</div>` : '';
+  const tip = q.tip ? `<div class="tip">${esc(q.tip)}</div>` : '';
+  const ops = q.opciones.map((o, i) => `
+      <label class="opt"><input type="radio" name="${q.id}" value="${i}">
+        <span><span class="opt-t">${esc(o.t)}</span>${o.d ? `<span class="opt-d">${esc(o.d)}</span>` : ''}</span>
+      </label>`).join('');
+  const nota = q.nota ? `<label class="campo" for="${q.nota.id}">${esc(q.nota.label)}</label><input type="text" id="${q.nota.id}">` : '';
+  return `<div class="pregunta">
+    <div class="pregunta-titulo">${esc(q.titulo)}</div>${leer}${tip}
+    <div class="opciones">${ops}</div>${nota}
+  </div>`;
+}
+
+function htmlFiltro(f) {
+  return `<div class="pregunta">
+    <div class="pregunta-titulo">${esc(f.titulo)}</div>
+    <div class="leer">${esc(f.leer)}</div>${f.tip ? `<div class="tip">${esc(f.tip)}</div>` : ''}
+    <div class="opciones fila">
+      <label class="opt"><input type="radio" name="${f.id}" value="si"><span class="opt-t">Sí</span></label>
+      <label class="opt"><input type="radio" name="${f.id}" value="no"><span class="opt-t">No</span></label>
+    </div>
+  </div>`;
+}
+
+function situacionesComoPreguntas(rol) {
+  return (SITUACIONES[rol] || []).map((s) => ({
+    id: s.id, leer: s.leer, titulo: s.titulo,
+    opciones: s.anclas.map((a, i) => ({ t: ANCLAS[i], d: a, p: PUNTOS_SIT[i] }))
+  }));
+}
+
+// =====================================================================
+// Render
+// =====================================================================
+function render() {
+  $('bloqueFiltros').innerHTML = FILTROS.map(htmlFiltro).join('');
+  $('bloqueExperiencia').innerHTML = EXPERIENCIA.map(htmlPregunta).join('');
+  $('bloqueDisponibilidad').innerHTML = DISPONIBILIDAD.map(htmlPregunta).join('');
+  $('bloqueDocumentacion').innerHTML = DOCUMENTACION.map(htmlPregunta).join('');
+  $('bloqueComunicacion').innerHTML = COMUNICACION.map(htmlPregunta).join('');
+  $('bloqueAlertas').innerHTML = ALERTAS.map((a) => `<label><input type="checkbox" id="${a.id}"><span>${esc(a.t)}</span></label>`).join('');
+}
+
+function renderSituaciones() {
+  const rol = rolActual();
+  if (!rol) return;
+  $('bloqueSituaciones').innerHTML = situacionesComoPreguntas(rol).map(htmlPregunta).join('');
+}
+
+function actualizarTextos() {
+  const nombre = $('nombre').value.trim().split(' ')[0] || '[nombre]';
+  const rol = ROLES[rolActual()] || '[rol]';
+  document.querySelectorAll('.ph-nombre').forEach((el) => { el.textContent = nombre; });
+  document.querySelectorAll('.ph-rol').forEach((el) => { el.textContent = rol; });
+}
+
+function marcarSeleccionadas() {
+  document.querySelectorAll('.opt').forEach((l) => {
+    const inp = l.querySelector('input');
+    l.classList.toggle('sel', !!(inp && inp.checked));
+  });
+}
+
+// =====================================================================
+// Cálculo
+// =====================================================================
+function valorRadio(name) {
+  const r = document.querySelector(`input[name="${name}"]:checked`);
+  return r ? r.value : null;
+}
+
+function sumarBloque(preguntas, faltantes, detalle) {
+  let total = 0;
+  preguntas.forEach((q) => {
+    const v = valorRadio(q.id);
+    if (v === null) { faltantes.push(q.titulo); return; }
+    const o = q.opciones[Number(v)];
+    total += o.p;
+    detalle.push(`${q.titulo}: ${o.t} (${o.p})`);
+  });
+  return total;
+}
+
+function calcular() {
+  const estado = $('estado').value;
+  const completada = estado === 'Completada';
+  const faltantes = [];
+  const detalle = [];
+
+  // Filtros
+  const filtrosFallidos = [];
+  let filtrosRespondidos = 0;
+  FILTROS.forEach((f) => {
+    const v = valorRadio(f.id);
+    if (v === null) return;
+    filtrosRespondidos++;
+    detalle.push(`${f.titulo}: ${v === 'si' ? 'Sí' : 'No'}`);
+    if (v === 'no') filtrosFallidos.push(f.titulo);
+  });
+  const ko = filtrosFallidos.length > 0;
+  if (completada && !ko && filtrosRespondidos < FILTROS.length) {
+    FILTROS.forEach((f) => { if (valorRadio(f.id) === null) faltantes.push(f.titulo); });
+  }
+
+  const sit = situacionesComoPreguntas(rolActual());
+  let exp = 0, dis = 0, sitP = 0, doc = 0, com = 0;
+  const alertas = [];
+
+  if (completada && !ko) {
+    exp = sumarBloque(EXPERIENCIA, faltantes, detalle);
+    dis = sumarBloque(DISPONIBILIDAD, faltantes, detalle);
+    if (!rolActual()) faltantes.push('Rol de la entrevista');
+    const sitBruto = sumarBloque(sit, faltantes, detalle);
+    sitP = sit.length ? Math.round((sitBruto * 30) / (sit.length * 10)) : 0;
+    doc = sumarBloque(DOCUMENTACION, faltantes, detalle);
+    com = sumarBloque(COMUNICACION, faltantes, detalle);
+    sit.forEach((q) => {
+      if (valorRadio(q.id) === '2') alertas.push(`Respuesta preocupante: ${q.titulo}`);
+    });
+    ALERTAS.forEach((a) => { if ($(a.id).checked) alertas.push(a.t); });
+  }
+
+  const total = exp + dis + sitP + doc + com;
+  let resultado = 'Sin completar';
+  if (!completada) resultado = estado;
+  else if (ko) resultado = 'No avanza';
+  else if (faltantes.length === 0) {
+    if (alertas.length >= 2 || total < 55) resultado = 'No avanza';
+    else if (total >= 75 && alertas.length === 0) resultado = 'Recomendada';
+    else resultado = 'En reserva';
+  }
+
+  return { estado, completada, ko, filtrosFallidos, exp, dis, sit: sitP, doc, com, total, alertas, resultado, faltantes, detalle };
+}
+
+function progreso(c) {
+  if (!c.completada || c.ko) return 100;
+  const nombres = [
+    'rol',
+    ...FILTROS.map((f) => f.id),
+    ...EXPERIENCIA.map((q) => q.id),
+    ...DISPONIBILIDAD.map((q) => q.id),
+    ...(rolActual() ? situacionesComoPreguntas(rolActual()).map((q) => q.id) : ['s1', 's2', 's3']),
+    ...DOCUMENTACION.map((q) => q.id),
+    ...COMUNICACION.map((q) => q.id)
+  ];
+  const respondidas = nombres.filter((n) => valorRadio(n) !== null).length;
+  return Math.round((respondidas / nombres.length) * 100);
+}
+
+function actualizar() {
+  marcarSeleccionadas();
+  actualizarTextos();
+  const c = calcular();
+
+  $('cuerpoEntrevista').classList.toggle('oculto', !c.completada);
+  $('avisoNoCompletada').classList.toggle('oculto', c.completada);
+  $('avisoKO').classList.toggle('oculto', !c.ko);
+  $('seccionesPuntaje').classList.toggle('oculto', c.ko);
+  $('resumen').classList.toggle('oculto', !c.completada);
+
+  $('totalNum').textContent = c.total;
+  $('stExp').textContent = `${c.exp} / 25`;
+  $('stDis').textContent = `${c.dis} / 20`;
+  $('stSit').textContent = `${c.sit} / 30`;
+  $('stDoc').textContent = `${c.doc} / 10`;
+  $('stCom').textContent = `${c.com} / 15`;
+  $('stAle').textContent = c.alertas.length;
+
+  const tag = $('resultadoTag');
+  tag.textContent = c.ko ? 'No avanza (requisito excluyente)' : c.resultado;
+  tag.className = 'resultado ' + (c.resultado === 'Recomendada' ? 'r-ok' : c.resultado === 'En reserva' ? 'r-res' : c.resultado === 'No avanza' ? 'r-no' : '');
+
+  const p = progreso(c);
+  $('barraProg').style.width = p + '%';
+  $('barraTexto').textContent = `${p}% completado`;
+}
+
+// =====================================================================
+// Búsqueda por DNI
+// =====================================================================
+let testHecho = '';
+
+function completarDesdeBase(datos) {
+  const campos = Object.keys(datos);
+  const buscar = (re) => campos.find((k) => re.test(normalizar(k)));
+  const setSiVacio = (id, valor) => { if (valor && !$(id).value.trim()) $(id).value = valor; };
+
+  const kCompleto = campos.find((k) => { const n = normalizar(k); return n.includes('nombre') && n.includes('apellido'); });
+  if (kCompleto) setSiVacio('nombre', datos[kCompleto]);
+  else {
+    const kNom = buscar(/nombre/);
+    const kApe = buscar(/apellido/);
+    setSiVacio('nombre', [datos[kNom] || '', datos[kApe] || ''].join(' ').trim());
+  }
+  const kTel = buscar(/telefono|whatsapp|celular/);
+  if (kTel) setSiVacio('telefono', datos[kTel]);
+  const kZona = buscar(/zona|barrio|localidad/);
+  if (kZona) setSiVacio('zona', datos[kZona]);
+
+  const kRol = buscar(/\brol\b|puesto|servicio/);
+  if (kRol && !rolActual()) {
+    const v = normalizar(datos[kRol]);
+    let rol = '';
+    if (v.includes('nin')) rol = 'ninera';
+    else if (v.includes('mayor') || v.includes('acompa') || v.includes('cuida')) rol = 'acompanante';
+    else if (v.includes('casa') || v.includes('domest') || v.includes('limpi') || v.includes('emplead')) rol = 'casas';
+    if (rol) {
+      document.querySelector(`input[name="rol"][value="${rol}"]`).checked = true;
+      renderSituaciones();
+    }
+  }
+}
+
+async function buscarDni() {
+  const dni = $('dni').value.replace(/\D/g, '');
+  const aviso = $('avisoBusqueda');
+  if (!dni) { aviso.innerHTML = '<div class="aviso warn">Escribí el DNI para buscar.</div>'; return; }
+  if (!API_URL.startsWith('http')) { aviso.innerHTML = '<div class="aviso mal">Falta configurar la URL del script en la página.</div>'; return; }
+  aviso.innerHTML = '<div class="aviso warn">Buscando...</div>';
+  try {
+    const url = `${API_URL}?accion=buscar&dni=${encodeURIComponent(dni)}&clave=${encodeURIComponent($('clave').value)}`;
+    const r = await fetch(url);
+    const res = await r.json();
+    if (!res.ok) { aviso.innerHTML = `<div class="aviso mal">${esc(res.error || 'No se pudo buscar.')}</div>`; return; }
+    if (!res.encontrado) {
+      aviso.innerHTML = '<div class="aviso warn">No encontramos ese DNI en la base. Completá los datos a mano.</div>';
+    } else {
+      completarDesdeBase(res.datos);
+      aviso.innerHTML = '<div class="aviso ok">✅ Datos cargados desde la base. Revisalos antes de llamar.</div>';
+    }
+    testHecho = res.test ? 'Sí' : 'No';
+    $('avisoTest').classList.toggle('oculto', !!res.test);
+    actualizar();
+  } catch (e) {
+    aviso.innerHTML = '<div class="aviso mal">No se pudo conectar con la planilla. Revisá tu conexión e intentá de nuevo.</div>';
+  }
+}
+
+// =====================================================================
+// Envío
+// =====================================================================
+async function guardar() {
+  const c = calcular();
+  const aviso = $('avisoEnvio');
+  const errores = [];
+  if (!$('clave').value.trim()) errores.push('la clave de acceso');
+  if (!$('evaluador').value.trim()) errores.push('tu nombre');
+  if (!$('nombre').value.trim()) errores.push('el nombre de la postulante');
+  if (!$('telefono').value.trim() && !$('dni').value.trim()) errores.push('el DNI o el teléfono');
+  if (c.completada && !c.ko && c.faltantes.length) errores.push('estas preguntas: ' + c.faltantes.join(', '));
+  if (c.completada && !rolActual()) errores.push('el rol');
+  if (errores.length) {
+    aviso.innerHTML = `<div class="aviso mal">Antes de guardar, completá ${esc(errores.join('; '))}.</div>`;
+    return;
+  }
+  if (!API_URL.startsWith('http')) { aviso.innerHTML = '<div class="aviso mal">Falta configurar la URL del script en la página.</div>'; return; }
+
+  const val = (id) => ($(id) ? $(id).value.trim() : '');
+  const datos = {
+    clave: $('clave').value.trim(),
+    evaluador: val('evaluador'),
+    estado: c.estado,
+    dni: $('dni').value.replace(/\D/g, ''),
+    nombre: val('nombre'),
+    telefono: val('telefono'),
+    rol: ROLES[rolActual()] || '',
+    zona: val('zona'),
+    filtrosOk: c.completada ? (c.ko ? 'No' : 'Sí') : '',
+    filtroFallido: c.filtrosFallidos.join(' | '),
+    experiencia: c.completada && !c.ko ? c.exp : '',
+    disponibilidad: c.completada && !c.ko ? c.dis : '',
+    situaciones: c.completada && !c.ko ? c.sit : '',
+    documentacion: c.completada && !c.ko ? c.doc : '',
+    comunicacion: c.completada && !c.ko ? c.com : '',
+    total: c.completada && !c.ko ? c.total : '',
+    alertas: c.completada && !c.ko ? c.alertas.length : '',
+    detalleAlertas: c.alertas.join(' | '),
+    resultado: c.resultado,
+    testPsicotecnico: testHecho,
+    referencias: val('referencias'),
+    horarios: val('horarios'),
+    cursos: val('cursos'),
+    observaciones: val('observaciones'),
+    detalle: c.detalle.join('\n')
+  };
+
+  const btn = $('btnGuardar');
+  btn.disabled = true;
+  btn.textContent = 'Guardando...';
+  try {
+    const r = await fetch(API_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+      body: JSON.stringify(datos)
+    });
+    const res = await r.json();
+    if (res.ok) {
+      aviso.innerHTML = '<div class="aviso ok">✅ Guardado en la hoja "Screening" de la planilla.</div>';
+      btn.classList.add('oculto');
+      $('btnNueva').classList.remove('oculto');
+    } else {
+      aviso.innerHTML = `<div class="aviso mal">${esc(res.error || 'No se pudo guardar.')}</div>`;
+    }
+  } catch (e) {
+    aviso.innerHTML = '<div class="aviso mal">No se pudo conectar con la planilla. No cierres la página e intentá de nuevo.</div>';
+  } finally {
+    btn.disabled = false;
+    btn.textContent = 'Guardar en la planilla';
+  }
+}
+
+function nuevaEntrevista() {
+  const clave = $('clave').value;
+  const evaluador = $('evaluador').value;
+  document.querySelectorAll('input[type=radio], input[type=checkbox]').forEach((i) => { i.checked = false; });
+  document.querySelectorAll('input[type=text], input[type=tel], textarea').forEach((i) => { i.value = ''; });
+  $('clave').value = clave;
+  $('evaluador').value = evaluador;
+  $('estado').value = 'Completada';
+  $('bloqueSituaciones').innerHTML = '<div class="aviso warn">Elegí el rol en la sección 1 para ver las situaciones.</div>';
+  $('avisoBusqueda').innerHTML = '';
+  $('avisoEnvio').innerHTML = '';
+  $('avisoTest').classList.add('oculto');
+  testHecho = '';
+  $('btnGuardar').classList.remove('oculto');
+  $('btnNueva').classList.add('oculto');
+  actualizar();
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+// =====================================================================
+// Inicio
+// =====================================================================
+render();
+$('evaluador').value = leerLocal('bw_evaluador');
+$('clave').value = leerLocal('bw_clave');
+
+document.addEventListener('change', (e) => {
+  if (e.target.name === 'rol') renderSituaciones();
+  if (e.target.id === 'evaluador') guardarLocal('bw_evaluador', e.target.value.trim());
+  if (e.target.id === 'clave') guardarLocal('bw_clave', e.target.value.trim());
+  actualizar();
+});
+document.addEventListener('input', (e) => {
+  if (e.target.id === 'nombre') actualizarTextos();
+});
+$('btnBuscar').addEventListener('click', buscarDni);
+$('dni').addEventListener('keydown', (e) => { if (e.key === 'Enter') buscarDni(); });
+$('btnGuardar').addEventListener('click', guardar);
+$('btnNueva').addEventListener('click', nuevaEntrevista);
+actualizar();
+</script>
+</body>
+</html>
