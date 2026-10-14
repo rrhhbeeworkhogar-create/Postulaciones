@@ -53,6 +53,17 @@
   .msg.ok{display:block;background:rgba(138,122,92,0.15);color:var(--cafe);}
   .msg.err{display:block;background:rgba(193,100,47,0.12);color:var(--terracota-d);}
   .role-block{display:none;}
+  .sjt-intro{background:var(--arena-osc);border-radius:12px;padding:14px 16px;font-size:13.5px;color:var(--cafe);margin-bottom:14px;}
+  .sjt-num{font-size:11px;font-weight:700;color:var(--terracota);letter-spacing:1px;margin-bottom:4px;}
+  .sjt-opt{border-top:1px dashed var(--line);padding:10px 0;}
+  .sjt-opt:first-of-type{border-top:none;}
+  .sjt-opt-text{font-size:14px;color:var(--text);margin-bottom:8px;}
+  .sjt-pick{display:flex;gap:8px;flex-wrap:wrap;}
+  .sjt-pick label{display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:500;color:var(--cafe);background:var(--arena);border:1px solid var(--line);border-radius:999px;padding:5px 12px;cursor:pointer;}
+  .sjt-pick input{accent-color:var(--terracota);width:16px;height:16px;}
+  .sjt-pick label.sel-mejor{background:#DDE8D6;border-color:#8FB083;}
+  .sjt-pick label.sel-peor{background:#F3D6C7;border-color:var(--terracota);}
+  .sjt-pick label.off{opacity:.35;cursor:not-allowed;}
   .role-block.active{display:block;}
 </style>
 </head>
@@ -73,7 +84,7 @@
 <div class="wrap">
   <div class="intro-card">
     <h1>Un poco más sobre vos</h1>
-    <p>Este cuestionario no tiene respuestas correctas o incorrectas — respondé como sos realmente, no como te gustaría ser. Te toma unos 8-10 minutos.</p>
+    <p>En la primera parte no hay respuestas correctas o incorrectas: respondé como sos realmente, no como te gustaría ser. Te toma unos 10 a 12 minutos.</p>
     <p>Necesitamos tu DNI para vincular este test con tu postulación.</p>
   </div>
 
@@ -101,7 +112,8 @@
     <div id="sinceridad-items"></div>
 
     <div id="role-ninera" class="role-block" data-role="ninera">
-      <div class="section-label">Sobre el cuidado de niños</div>
+      <div class="section-label">Situaciones con niños</div>
+      <div class="sjt-intro">En cada situación, marcá <strong>la opción que te parece más adecuada</strong> y <strong>la que te parece menos adecuada</strong>. Tienen que ser dos opciones distintas.</div>
       <div id="ninera-items"></div>
     </div>
     <div id="role-cuidador" class="role-block" data-role="cuidador">
@@ -149,13 +161,58 @@ const SINCERIDAD = [
   ['gs2','Siempre estoy de buen humor, sin excepción.'],
   ['gs3','Jamás sentí bronca o rabia hacia otra persona.']
 ];
-const NINERA = [
-  ['nn1','Puedo repetir la misma explicación varias veces sin perder la paciencia.'],
-  ['nn2','Un berrinche o llanto de un chico no me altera ni me hace perder el control.'],
-  ['nn3','Disfruto jugar y estar al nivel de un niño, sin aburrirme fácil.'],
-  ['nr1','Ante una emergencia con un niño, sé que puedo reaccionar rápido y con calma.'],
-  ['nr2','Estoy atenta todo el tiempo a lo que hace un niño a mi cargo, aunque esté haciendo otra tarea.'],
-  ['nr3','Sabría qué hacer si un chico se lastima o se descompone estando bajo mi cuidado.']
+// Situaciones de niñera: la clave de puntaje está solo en el servidor.
+const SITUACIONES_NINERA = [
+  ['En la plaza, un nene de 4 años tiene un berrinche porque no se quiere ir.', [
+    ['a','Le propongo quedarnos un rato más si después viene sin protestar.'],
+    ['b','Le ofrezco elegir cómo volver: caminando o de la mano.'],
+    ['c','Me agacho a su altura, le digo que entiendo que está enojado, pero que igual nos vamos.'],
+    ['d','Lo alzo y nos vamos, para que el berrinche no se haga más largo.']]],
+  ['Una nena de 6 años tira el cuaderno al piso porque no quiere hacer la tarea.', [
+    ['a','Le hago yo la parte difícil, para que no se frustre.'],
+    ['b','Le pregunto qué parte le cuesta y empezamos por ahí.'],
+    ['c','Le explico que si no termina la tarea, después no hay juego.'],
+    ['d','Le propongo un descanso de diez minutos y después volvemos.']]],
+  ['Tenés que preparar la merienda y el bebé de 1 año está jugando en el living.', [
+    ['a','Lo pongo en el corralito con sus juguetes y voy a la cocina.'],
+    ['b','Voy a la cocina y le hablo desde ahí para saber que está bien.'],
+    ['c','Le pongo dibujitos y preparo la merienda rápido.'],
+    ['d','Lo llevo a la cocina y lo siento en su sillita, donde lo veo.']]],
+  ['Un nene de 3 años se golpea la cabeza con la mesa. Llora, pero a los diez minutos ya está jugando normal.', [
+    ['a','Lo llevo a la guardia más cercana para que lo revisen.'],
+    ['b','Si ya está jugando bien, sigo con la rutina normal.'],
+    ['c','Le aviso a la familia en ese momento y lo sigo observando.'],
+    ['d','Se lo cuento a la familia cuando vuelve, para no preocuparlos.']]],
+  ['Cuidás 4 horas a dos hermanos de 5 y 8 años y llueve, así que no pueden salir.', [
+    ['a','Les pongo una película que les guste y la vemos juntos.'],
+    ['b','Les propongo armar entre los tres una carpa con sábanas en el living.'],
+    ['c','Mientras juegan solos, aprovecho para ordenar sus cuartos.'],
+    ['d','Les pregunto qué quieren hacer y los dejo elegir la actividad.']]],
+  ['Un nene de 2 años te pide que le leas el mismo cuento por quinta vez seguida.', [
+    ['a','Le propongo leer otro cuento parecido.'],
+    ['b','Se lo leo de nuevo y le pido que me cuente qué pasa después.'],
+    ['c','Le digo que ya lo leímos muchas veces y pasamos a otro juego.'],
+    ['d','Se lo leo otra vez, igual que las anteriores.']]],
+  ['Después de almorzar, una nena de 4 años no se quiere lavar los dientes.', [
+    ['a','Se los lavo yo, rápido, aunque se resista.'],
+    ['b','Lo dejo para la noche, que se los lava con la familia.'],
+    ['c','Le explico para qué sirve y le doy el cepillo para que lo haga sola.'],
+    ['d','Lo convierto en un juego: primero ella me "lava" los dientes a mí.']]],
+  ['La familia pidió que el nene no use pantallas. Él llora y dice que su papá sí lo deja.', [
+    ['a','Le escribo al papá para preguntarle si es así.'],
+    ['b','Le dejo un rato corto, para que no se angustie.'],
+    ['c','Le ofrezco otra actividad que le guste mucho.'],
+    ['d','Le explico que conmigo valen las reglas que me dio la familia.']]],
+  ['Mientras respondías un mensaje en el celular, el nene de 3 años se cayó del sillón y se raspó la rodilla. No es grave.', [
+    ['a','Le cuento a la familia que se cayó jugando y que ya está bien.'],
+    ['b','Le aviso a la familia por mensaje que se cayó y que ya lo curé.'],
+    ['c','No lo menciono, porque fue un raspón sin importancia.'],
+    ['d','Le cuento a la familia que se cayó mientras yo estaba con el celular.']]],
+  ['Tocan el timbre. Un hombre dice ser el tío y viene a buscar a la nena de 5 años porque los papás se demoraron. La nena lo reconoce.', [
+    ['a','Le pido el DNI y le saco una foto antes de entregársela.'],
+    ['b','Lo hago pasar a esperar mientras llamo a la familia.'],
+    ['c','Si la nena está tranquila con él, se la entrego y le aviso a la familia.'],
+    ['d','Le pido que espere afuera y no se la entrego hasta hablar con la familia.']]]
 ];
 const CUIDADOR = [
   ['cv1','Puedo tratar con cariño y respeto a una persona aunque ya no se acuerde bien de las cosas.'],
@@ -188,9 +245,49 @@ function renderLikert(containerId, items){
 }
 renderLikert('general-items', GENERAL);
 renderLikert('sinceridad-items', SINCERIDAD);
-renderLikert('ninera-items', NINERA);
+renderSituaciones('ninera-items', SITUACIONES_NINERA);
 renderLikert('cuidador-items', CUIDADOR);
 renderLikert('empleada-items', EMPLEADA);
+
+function mezclar(arr){
+  const a = arr.slice();
+  for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; }
+  return a;
+}
+// Cada situación: elegir la más adecuada y la menos adecuada. Las opciones se muestran en orden aleatorio.
+function renderSituaciones(containerId, situaciones){
+  const c = document.getElementById(containerId);
+  situaciones.forEach(([texto, opciones], idx) => {
+    const n = idx + 1;
+    const div = document.createElement('div');
+    div.className = 'q-block';
+    div.dataset.sit = n;
+    div.innerHTML = `<div class="sjt-num">SITUACIÓN ${n} DE ${situaciones.length}</div><div class="q-text">${texto}</div>` +
+      mezclar(opciones).map(([id, t]) => `<div class="sjt-opt">
+        <div class="sjt-opt-text">${t}</div>
+        <div class="sjt-pick">
+          <label><input type="radio" name="s${n}_mejor" value="${id}"> Más adecuada</label>
+          <label><input type="radio" name="s${n}_peor" value="${id}"> Menos adecuada</label>
+        </div></div>`).join('');
+    div.addEventListener('change', () => actualizarSituacion(div, n));
+    c.appendChild(div);
+  });
+}
+// No se puede marcar la misma opción como más y menos adecuada
+function actualizarSituacion(div, n){
+  const mejor = div.querySelector(`input[name="s${n}_mejor"]:checked`);
+  const peor = div.querySelector(`input[name="s${n}_peor"]:checked`);
+  div.querySelectorAll('input[type=radio]').forEach(inp => {
+    const lab = inp.parentElement;
+    const esMejor = inp.name.endsWith('_mejor');
+    const otro = esMejor ? peor : mejor;
+    const bloquear = !!otro && otro.value === inp.value;
+    inp.disabled = bloquear;
+    lab.classList.toggle('off', bloquear);
+    lab.classList.toggle('sel-mejor', esMejor && inp.checked);
+    lab.classList.toggle('sel-peor', !esMejor && inp.checked);
+  });
+}
 
 const rolSelect = document.getElementById('rol');
 const roleBlocks = document.querySelectorAll('.role-block');
@@ -206,7 +303,9 @@ rolSelect.addEventListener('change', updateRole);
 
 const form = document.getElementById('form-test');
 function totalRequired(){
-  return form.querySelectorAll('input[type=radio][required]').length / 5;
+  const nombres = new Set();
+  form.querySelectorAll('input[type=radio][required]').forEach(i => nombres.add(i.name));
+  return nombres.size;
 }
 function updateProgress(){
   const total = totalRequired();
@@ -239,7 +338,9 @@ form.addEventListener('submit', async (e) => {
     if(data.ok){
       msg.className='msg ok';
       msg.textContent = '¡Listo! Recibimos tus respuestas. Gracias por tomarte el tiempo.';
-      form.reset(); updateRole();
+      form.reset();
+      document.querySelectorAll('[data-sit]').forEach(d => actualizarSituacion(d, d.dataset.sit));
+      updateRole();
     } else { throw new Error(data.error || 'Error'); }
   } catch(err){
     msg.className='msg err';
