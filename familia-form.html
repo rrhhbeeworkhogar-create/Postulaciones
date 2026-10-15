@@ -161,7 +161,7 @@ src="https://www.facebook.com/tr?id=1412505504222087&ev=PageView&noscript=1"
       </div>
       <div class="field">
         <label for="dni">DNI *</label>
-        <input type="text" id="dni" name="dni" required inputmode="numeric">
+        <input type="text" id="dni" name="dni" inputmode="numeric">
       </div>
     </div>
     <div class="row-2">
@@ -175,8 +175,8 @@ src="https://www.facebook.com/tr?id=1412505504222087&ev=PageView&noscript=1"
       </div>
     </div>
     <div class="field">
-      <label for="domicilio">Domicilio *</label>
-      <input type="text" id="domicilio" name="domicilio" required placeholder="Calle, altura, barrio">
+      <label for="domicilio">Domicilio (opcional)</label>
+      <input type="text" id="domicilio" name="domicilio" placeholder="Calle, altura, barrio">
     </div>
     <div class="field">
       <label for="zona">Zona *</label>
@@ -228,8 +228,8 @@ src="https://www.facebook.com/tr?id=1412505504222087&ev=PageView&noscript=1"
   <div class="form-block">
     <div class="form-block-title">Detalle del pedido</div>
     <div class="field">
-      <label for="dias_horario">Días y horario que necesitás *</label>
-      <input type="text" id="dias_horario" name="dias_horario" required placeholder="Ej: Lunes a viernes, 8 a 13hs">
+      <label for="dias_horario">Días y horario que necesitás (opcional)</label>
+      <input type="text" id="dias_horario" name="dias_horario" placeholder="Ej: Lunes a viernes, 8 a 13hs">
     </div>
     <div class="field">
       <label for="tareas">Tareas o detalle específico</label>
@@ -339,6 +339,13 @@ document.querySelectorAll('#grupo-servicio input').forEach(input => {
     }
   });
 });
+
+// Preseleccionar servicio si viene por parámetro (?servicio=ninera / personal_casas / acompanante)
+const servicioPre = params.get('servicio');
+if (servicioPre) {
+  const r = document.querySelector(`input[name="servicio"][value="${servicioPre}"]`);
+  if (r) { r.checked = true; r.dispatchEvent(new Event('change')); }
+}
 
 const form = document.getElementById('form-familia');
 const btn = document.getElementById('btn-submit');
