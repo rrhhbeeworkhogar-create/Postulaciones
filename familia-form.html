@@ -273,6 +273,10 @@ src="https://www.facebook.com/tr?id=1412505504222087&ev=PageView&noscript=1"
         <option value="otro">Otro</option>
       </select>
     </div>
+    <div class="field">
+      <label for="referido">¿Te recomendó alguien? <span class="hint">(opcional)</span></label>
+      <input type="text" id="referido" name="referido" placeholder="Nombre de la familia socia o embajadora">
+    </div>
   </div>
 
   <div class="field">
@@ -340,6 +344,13 @@ document.querySelectorAll('#grupo-servicio input').forEach(input => {
   });
 });
 
+// Referida / embajadora: ?ref=Nombre precarga quién recomendó
+const refPre = params.get('ref');
+if (refPre) {
+  document.getElementById('referido').value = refPre;
+  document.getElementById('como_te_enteraste').value = 'recomendacion';
+}
+
 // Preseleccionar servicio si viene por parámetro (?servicio=ninera / personal_casas / acompanante)
 const servicioPre = params.get('servicio');
 if (servicioPre) {
@@ -359,6 +370,9 @@ form.addEventListener('submit', function(e){
 
   const data = Object.fromEntries(new FormData(form).entries());
   data.timestamp = new Date().toISOString();
+  if (data.referido && data.referido.trim()) {
+    data.como_te_enteraste = (data.como_te_enteraste || 'recomendacion') + ' | Recomendó: ' + data.referido.trim();
+  }
 
   fetch(SCRIPT_URL, {
     method: 'POST',
