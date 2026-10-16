@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="light">
+<title>Beneficios BeeWork Hogar — Referidas, garantía y embajadoras</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+--terracota:#C1642F; --terracota-d:#A54F22; --terracota-l:#E8935F;
+--arena:#EFE4D3; --arena-osc:#E4D2B8; --musgo:#8A7A5C; --cafe:#5C4A3A; --cafe-d:#3E3226;
+--card:#FFFDF8; --text:#4A3A2C; --text-dim:#8A7A5C; --line:rgba(92,74,58,0.14);
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{background:var(--arena);color:var(--text);font-family:'Poppins',sans-serif;line-height:1.65;-webkit-font-smoothing:antialiased;}
+.wrap{max-width:920px;margin:0 auto;padding:0 28px;}
+a{color:inherit;}
+img,svg{display:block;max-width:100%;}
+::selection{background:var(--terracota);color:#fff;}
+header{background:rgba(255,253,248,0.92);backdrop-filter:blur(8px);padding:20px 0;border-bottom:1px solid var(--line);position:sticky;top:0;z-index:30;}
+.header-row{display:flex;align-items:center;justify-content:space-between;}
+.brand{display:flex;align-items:center;gap:12px;}
+.brand svg{width:36px;}
+.brand-word{display:flex;flex-direction:column;line-height:1.05;}
+.brand-be{font-weight:700;font-size:14.5px;letter-spacing:1.6px;color:var(--terracota);}
+.brand-ho{font-weight:600;font-size:9.5px;letter-spacing:2.8px;color:var(--cafe);}
+.back-link{font-size:14px;font-weight:600;color:var(--cafe);opacity:0.75;text-decoration:none;}
+.back-link:hover{opacity:1;}
+
+/* HERO */
+.hero{padding:64px 0 48px;text-align:center;}
+.badge-hero{
+display:inline-flex;align-items:center;gap:8px;background:var(--terracota);color:#FFFDF8;
+font-size:13px;font-weight:700;padding:8px 18px;border-radius:999px;margin-bottom:24px;
+}
+h1{font-size:clamp(30px,5vw,44px);font-weight:700;color:var(--cafe);line-height:1.15;margin-bottom:16px;}
+.hero p.lead{font-size:17px;color:var(--text-dim);max-width:560px;margin:0 auto 32px;}
+.price-tag{font-size:52px;font-weight:700;color:var(--terracota);margin-bottom:6px;}
+.price-tag small{font-size:18px;font-weight:500;color:var(--text-dim);}
+.btn-primary{
+background:var(--terracota);color:#FFFDF8;font-weight:600;font-size:15.5px;
+padding:17px 34px;border-radius:999px;text-decoration:none;display:inline-flex;align-items:center;gap:10px;
+box-shadow:0 10px 26px rgba(193,100,47,0.3);transition:transform .18s ease, background .2s ease, box-shadow .2s;
+}
+.btn-primary:hover{background:var(--terracota-d);transform:translateY(-2px);box-shadow:0 14px 30px rgba(193,100,47,0.38);}
+.btn-secondary{
+background:transparent;color:var(--cafe);border:2px solid var(--cafe);font-weight:600;font-size:15px;
+padding:15px 30px;border-radius:999px;text-decoration:none;display:inline-flex;align-items:center;gap:10px;
+transition:background .2s ease, color .2s ease;
+}
+.btn-secondary:hover{background:var(--cafe);color:#FFFDF8;}
+.cta-row{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin-top:28px;}
+
+section{padding:48px 0;}
+.section-title{font-size:12px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:var(--terracota);margin-bottom:12px;}
+h2{font-size:26px;font-weight:600;color:var(--cafe);letter-spacing:-0.3px;margin-bottom:16px;}
+.section-sub{font-size:15px;color:var(--text-dim);max-width:600px;margin-bottom:32px;}
+
+/* QUE INCLUYE */
+.incluye-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:18px;}
+.incluye-card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:24px 22px;}
+.incluye-card .ic{width:38px;height:38px;border-radius:11px;background:var(--arena-osc);display:flex;align-items:center;justify-content:center;margin-bottom:14px;}
+.incluye-card .ic svg{width:20px;height:20px;color:var(--terracota-d);}
+.incluye-card h3{font-size:15.5px;font-weight:600;color:var(--cafe);margin-bottom:6px;}
+.incluye-card p{font-size:13.5px;color:var(--text-dim);}
+
+/* COBROS - tabla */
+.cobros-table{background:var(--card);border:1px solid var(--line);border-radius:18px;overflow:hidden;}
+.cobro-row{display:flex;gap:20px;padding:22px 26px;border-bottom:1px solid var(--line);align-items:flex-start;}
+.cobro-row:last-child{border-bottom:none;}
+.cobro-num{
+flex:0 0 34px;height:34px;border-radius:50%;background:var(--arena-osc);color:var(--cafe);
+font-weight:700;font-size:14px;display:flex;align-items:center;justify-content:center;
+}
+.cobro-body h3{font-size:16px;font-weight:600;color:var(--cafe);margin-bottom:4px;}
+.cobro-body p{font-size:14px;color:var(--text-dim);}
+.cobro-monto{font-weight:700;color:var(--terracota);}
+
+/* TURNOS */
+.turnos-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:18px;}
+.turno-card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:26px;text-align:center;}
+.turno-card .dur{font-size:14px;font-weight:600;color:var(--text-dim);margin-bottom:8px;}
+.turno-card .monto{font-size:32px;font-weight:700;color:var(--terracota);margin-bottom:4px;}
+.turno-card .nota{font-size:12.5px;color:var(--text-dim);}
+
+/* PASAR A FIJO */
+.fijo-card{background:var(--cafe);border-radius:22px;padding:40px 36px;color:var(--arena);}
+.fijo-card .section-title{color:var(--terracota-l);}
+.fijo-card h2{color:#fff;}
+.fijo-compare{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:24px;}
+.fijo-box{border-radius:14px;padding:22px;}
+.fijo-box.antes{background:rgba(255,253,248,0.1);}
+.fijo-box.despues{background:var(--card);}
+.fijo-box .fh{font-size:13px;font-weight:600;margin-bottom:8px;}
+.fijo-box.antes .fh{color:var(--arena-osc);}
+.fijo-box.despues .fh{color:var(--cafe);}
+.fijo-box .fp{font-size:38px;font-weight:700;}
+.fijo-box.antes .fp{color:var(--arena);}
+.fijo-box.despues .fp{color:var(--terracota);}
+.fijo-box .fd{font-size:13px;margin-top:6px;}
+.fijo-box.antes .fd{color:var(--arena-osc);}
+.fijo-box.despues .fd{color:var(--text-dim);}
+
+/* PROMO */
+.promo-card{background:var(--arena-osc);border-radius:18px;padding:28px 30px;display:flex;gap:16px;align-items:flex-start;}
+.promo-card svg{width:26px;height:26px;flex-shrink:0;color:var(--cafe);margin-top:2px;}
+.promo-card p{font-size:14.5px;color:var(--cafe);line-height:1.55;}
+
+/* FAQ */
+.faq-item{border-bottom:1px solid var(--line);padding:20px 0;}
+.faq-item:first-child{padding-top:0;}
+.faq-item h3{font-size:15.5px;font-weight:600;color:var(--cafe);margin-bottom:8px;}
+.faq-item p{font-size:14px;color:var(--text-dim);}
+
+/* CTA FINAL */
+.final-cta{background:var(--card);border:1px solid var(--line);border-radius:24px;padding:48px 36px;text-align:center;}
+.final-cta h2{margin:0 auto 10px;}
+.final-cta p{font-size:15px;color:var(--text-dim);max-width:440px;margin:0 auto 24px;}
+
+footer{background:var(--cafe);padding:44px 0 32px;text-align:center;}
+footer svg{margin:0 auto 14px;width:44px;}
+.footer-brand{color:var(--arena);font-weight:700;letter-spacing:1px;font-size:14px;margin-bottom:10px;}
+footer p{color:var(--arena-osc);font-size:13px;margin-bottom:4px;opacity:0.85;}
+.footer-links{margin-top:16px;font-size:13px;}
+.footer-links a{color:var(--arena);text-decoration:underline;opacity:0.8;}
+
+@media (max-width:720px){
+.incluye-grid{grid-template-columns:1fr;}
+.turnos-grid{grid-template-columns:1fr;}
+.fijo-compare{grid-template-columns:1fr;}
+.cobro-row{flex-direction:column;gap:8px;}
+.final-cta{padding:36px 22px;}
+}
+
+/* BENEFICIOS */
+.steps-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;}
+.step-card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:24px 22px;}
+.step-card .sn{width:34px;height:34px;border-radius:50%;background:var(--terracota);color:#FFFDF8;font-weight:700;font-size:14px;display:flex;align-items:center;justify-content:center;margin-bottom:14px;}
+.step-card h3{font-size:15.5px;font-weight:600;color:var(--cafe);margin-bottom:6px;}
+.step-card p{font-size:13.5px;color:var(--text-dim);}
+.nota-chica{font-size:13.5px;color:var(--text-dim);margin-top:18px;}
+.garantia-box{background:var(--cafe);border-radius:22px;padding:40px 36px;color:var(--arena);display:grid;grid-template-columns:auto 1fr;gap:26px;align-items:center;}
+.garantia-box .gi{width:64px;height:64px;border-radius:18px;background:rgba(239,228,211,0.12);display:flex;align-items:center;justify-content:center;}
+.garantia-box .gi svg{width:32px;height:32px;color:var(--terracota-l);}
+.garantia-box .section-title{color:var(--terracota-l);}
+.garantia-box h2{color:#fff;}
+.garantia-box p{color:var(--arena-osc);font-size:14.5px;}
+.garantia-box .gnota{font-size:13px;margin-top:10px;opacity:0.85;}
+.premio-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:18px;margin-bottom:28px;}
+.premio-card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:26px;text-align:center;}
+.premio-card .pc{font-size:14px;font-weight:600;color:var(--text-dim);margin-bottom:8px;}
+.premio-card .pm{font-size:36px;font-weight:700;color:var(--terracota);margin-bottom:4px;}
+.premio-card .pn{font-size:12.5px;color:var(--text-dim);}
+@media (max-width:720px){
+.steps-grid{grid-template-columns:1fr;}
+.premio-grid{grid-template-columns:1fr;}
+.garantia-box{grid-template-columns:1fr;text-align:center;padding:34px 24px;}
+.garantia-box .gi{margin:0 auto;}
+}
+</style>
+<!-- Meta Pixel Code -->
+<script>
+!function(f,b,e,v,n,t,s)
+{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];
+s.parentNode.insertBefore(t,s)}(window, document,'script',
+'https://connect.facebook.net/en_US/fbevents.js');
+fbq('init', '1412505504222087');
+fbq('track', 'PageView');
+</script>
+<noscript><img height="1" width="1" style="display:none"
+src="https://www.facebook.com/tr?id=1412505504222087&ev=PageView&noscript=1"
+/></noscript>
+<!-- End Meta Pixel Code -->
+</head>
+<body>
+<header>
+<div class="wrap header-row">
+<div class="brand">
+<svg viewBox="0 0 140 90" xmlns="http://www.w3.org/2000/svg">
+<polygon points="45,8 65,8 75,26 65,44 45,44 35,26" fill="#C1642F"/>
+<polygon points="10,30 30,30 40,48 30,66 10,66 0,48" fill="none" stroke="#5C4A3A" stroke-width="4"/>
+<polygon points="80,30 100,30 110,48 100,66 80,66 70,48" fill="none" stroke="#5C4A3A" stroke-width="4"/>
+<polygon points="45,52 65,52 75,70 65,88 45,88 35,70" fill="#5C4A3A"/>
+</svg>
+<div class="brand-word"><span class="brand-be">BEEWORK</span><span class="brand-ho">HOGAR</span></div>
+</div>
+<a href="familias.html" class="back-link">← Volver a familias</a>
+</div>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+<div class="wrap">
+<div class="badge-hero">🎁 Beneficios BeeWork Hogar</div>
+<h1>Recomendá, probá tranquila y ganá con nosotros</h1>
+<p class="lead">Tres formas de sumarte a la comunidad de BeeWork Hogar: turnos extra por recomendar, garantía en tu primer turno y un programa para quienes nos acercan familias.</p>
+<div class="cta-row">
+<a class="btn-primary" href="#referidas">Ver los beneficios</a>
+<a href="#embajadoras" class="btn-secondary">Quiero ser embajadora</a>
+</div>
+</div>
+</section>
+
+<!-- REFERIDAS -->
+<section id="referidas">
+<div class="wrap">
+<div class="section-title">Para familias socias</div>
+<h2>Recomendá y sumá turnos 💛</h2>
+<p class="section-sub">Si una familia que vos recomendaste se suma a la membresía, te regalamos un turno extra en tu próximo ciclo.</p>
+<div class="steps-grid">
+<div class="step-card">
+<div class="sn">1</div>
+<h3>Compartí BeeWork Hogar</h3>
+<p>Contale a una familia conocida que necesite ayuda en casa.</p>
+</div>
+<div class="step-card">
+<div class="sn">2</div>
+<h3>Que ponga tu nombre</h3>
+<p>Cuando complete el formulario, que ponga tu nombre en "¿Te recomendó alguien?".</p>
+</div>
+<div class="step-card">
+<div class="sn">3</div>
+<h3>Sumás un turno</h3>
+<p>Cuando se suma a la membresía, te agregamos 1 turno extra sin cargo en tu próximo ciclo.</p>
+</div>
+</div>
+<p class="nota-chica">Un turno extra por cada familia que se sume, sin límite. El beneficio aplica mientras tu membresía esté activa.</p>
+</div>
+</section>
+
+<!-- GARANTIA PRIMER TURNO -->
+<section id="garantia">
+<div class="wrap">
+<div class="garantia-box">
+<div class="gi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 12l2 2 4-4M12 3l8 4v5c0 5-3.5 9-8 10-4.5-1-8-5-8-10V7l8-4z"/></svg></div>
+<div>
+<div class="section-title">Garantía en tu primer turno</div>
+<h2>Si no te convenció, va otra persona</h2>
+<p>Si la persona de tu primer turno no te convenció, avisanos dentro de las 24hs y coordinamos un nuevo turno con otra persona de nuestra base, sin descontarlo de tus 3 turnos del ciclo.</p>
+<p class="gnota">Aplica una vez, al primer turno de tu membresía.</p>
+</div>
+</div>
+</div>
+</section>
+
+<!-- EMBAJADORAS -->
+<section id="embajadoras" style="background:var(--arena-osc);">
+<div class="wrap">
+<div class="section-title">Programa de embajadoras</div>
+<h2>¿Conocés familias que necesitan ayuda en casa?</h2>
+<p class="section-sub">Recomendanos y ganá por cada familia que contrate. No hace falta ser socia: cualquier persona puede ser embajadora o embajador.</p>
+<div class="premio-grid">
+<div class="premio-card">
+<div class="pc">Si la familia contrata una búsqueda permanente</div>
+<div class="pm">15%</div>
+<div class="pn">de lo que cobra BeeWork Hogar por la búsqueda</div>
+</div>
+<div class="premio-card">
+<div class="pc">Si la familia se suma a la membresía</div>
+<div class="pm">$40.000</div>
+<div class="pn">el primer pago completo de su membresía</div>
+</div>
+</div>
+<div class="steps-grid">
+<div class="step-card">
+<div class="sn">1</div>
+<h3>Te anotás</h3>
+<p>Nos escribís y te damos tu link personal para compartir.</p>
+</div>
+<div class="step-card">
+<div class="sn">2</div>
+<h3>Compartís tu link</h3>
+<p>Las familias que entran por tu link quedan registradas a tu nombre.</p>
+</div>
+<div class="step-card">
+<div class="sn">3</div>
+<h3>Cobrás</h3>
+<p>Cuando la familia paga, te transferimos tu parte. Es un pago único por familia.</p>
+</div>
+</div>
+<div class="cta-row">
+<a class="btn-primary" href="https://wa.me/5493875488458?text=Hola!%20Quiero%20sumarme%20al%20programa%20de%20embajadoras%20de%20BeeWork%20Hogar." target="_blank" rel="noopener">Quiero ser embajadora</a>
+</div>
+</div>
+</section>
+
+<!-- PREGUNTAS -->
+<section id="preguntas">
+<div class="wrap">
+<div class="section-title">Preguntas frecuentes</div>
+<h2>Lo que más nos preguntan</h2>
+<div class="faq-item">
+<h3>¿Puedo recomendar a una familia y también ser embajadora?</h3>
+<p>Sí, pero cada familia cuenta para un solo beneficio: si sos socia, elegís entre el turno extra o el pago de embajadora.</p>
+</div>
+<div class="faq-item">
+<h3>¿Cuándo se acredita el turno extra por recomendar?</h3>
+<p>En tu próximo ciclo de 30 días, una vez que la familia recomendada pagó su primera membresía.</p>
+</div>
+<div class="faq-item">
+<h3>¿La garantía del primer turno cuesta algo?</h3>
+<p>No. El turno de reemplazo no se descuenta de tus 3 turnos. A la nueva persona le pagás directo vos, como en cualquier turno.</p>
+</div>
+</div>
+</section>
+
+<!-- CTA FINAL -->
+<section id="contacto">
+<div class="wrap">
+<div class="final-cta">
+<div class="section-title">Empecemos</div>
+<h2>¿Lista para sumarte?</h2>
+<p>Elegí cómo querés trabajar con nosotros y completá el formulario en un par de minutos.</p>
+<div class="cta-row" style="margin-top:0;">
+<a class="btn-primary" href="familia-form.html?modalidad=membresia">Sumarme a la membresía</a>
+<a class="btn-secondary" href="familia-form.html?modalidad=permanente">Iniciar búsqueda permanente</a>
+</div>
+</div>
+</div>
+</section>
+
+<footer>
+<svg viewBox="0 0 140 90" xmlns="http://www.w3.org/2000/svg">
+<polygon points="45,8 65,8 75,26 65,44 45,44 35,26" fill="#C1642F"/>
+<polygon points="10,30 30,30 40,48 30,66 10,66 0,48" fill="none" stroke="#E4D2B8" stroke-width="4"/>
+<polygon points="80,30 100,30 110,48 100,66 80,66 70,48" fill="none" stroke="#E4D2B8" stroke-width="4"/>
+<polygon points="45,52 65,52 75,70 65,88 45,88 35,70" fill="#E4D2B8"/>
+</svg>
+<div class="footer-brand">BEEWORK HOGAR</div>
+<p>Un servicio de BeeWork SRL</p>
+<p>📞 387 5488458 &nbsp;|&nbsp; ✉️ beeworkhogar@gmail.com</p>
+<p>📷 @beeworkhogar &nbsp;|&nbsp; <a href="https://www.facebook.com/BeeworkHogar" style="color:var(--arena);text-decoration:underline;">Facebook</a></p>
+<div class="footer-links"><a href="familias.html">← Volver a familias</a> &nbsp;·&nbsp; <a href="membresia.html">Membresía</a> &nbsp;·&nbsp; <a href="index.html">Inicio</a> &nbsp;·&nbsp; <a href="aviso-legal.html">Aviso legal</a></div>
+</footer>
+
+</body>
+</html>
