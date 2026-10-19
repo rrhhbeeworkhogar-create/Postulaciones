@@ -64,6 +64,11 @@ border:1.5px solid var(--line);font-size:13.5px;font-weight:600;color:var(--cafe
 background:#fff;transition:all .18s;cursor:pointer;
 }
 .chip input:checked + span{background:var(--terracota);border-color:var(--terracota);color:#fff;}
+.mas-detalles{border:1.5px solid var(--line);border-radius:14px;background:#fff;margin-bottom:22px;}
+.mas-detalles summary{cursor:pointer;padding:14px 18px;font-size:14px;font-weight:600;color:var(--cafe);list-style:none;}
+.mas-detalles summary::-webkit-details-marker{display:none;}
+.mas-detalles[open] summary{border-bottom:1px solid var(--line);}
+.mas-detalles-body{padding:18px 18px 4px;}
 .condicional{display:none;border-left:3px solid var(--terracota-l);padding-left:16px;margin-top:12px;}
 .condicional.show{display:block;}
 .check-row{display:flex;align-items:flex-start;gap:10px;margin-top:6px;}
@@ -160,23 +165,9 @@ src="https://www.facebook.com/tr?id=1412505504222087&ev=PageView&noscript=1"
         <input type="text" id="nombre" name="nombre" required>
       </div>
       <div class="field">
-        <label for="dni">DNI (opcional)</label>
-        <input type="text" id="dni" name="dni" inputmode="numeric">
-      </div>
-    </div>
-    <div class="row-2">
-      <div class="field">
         <label for="telefono">WhatsApp / Teléfono *</label>
         <input type="tel" id="telefono" name="telefono" required>
       </div>
-      <div class="field">
-        <label for="email">Email</label>
-        <input type="email" id="email" name="email">
-      </div>
-    </div>
-    <div class="field">
-      <label for="domicilio">Domicilio (opcional)</label>
-      <input type="text" id="domicilio" name="domicilio" placeholder="Calle, altura, barrio">
     </div>
     <div class="field">
       <label for="zona">Zona *</label>
@@ -223,61 +214,75 @@ src="https://www.facebook.com/tr?id=1412505504222087&ev=PageView&noscript=1"
         <label class="chip"><input type="radio" name="modalidad" value="membresia"><span>Membresía (turnos eventuales)</span></label>
       </div>
     </div>
-  </div>
 
-  <div class="form-block">
-    <div class="form-block-title">Detalle del pedido</div>
-    <div class="field">
-      <label for="dias_horario">Días y horario que necesitás (opcional)</label>
-      <input type="text" id="dias_horario" name="dias_horario" placeholder="Ej: Lunes a viernes, 8 a 13hs">
-    </div>
-    <div class="field">
-      <label for="tareas">Tareas o detalle específico</label>
-      <textarea id="tareas" name="tareas" placeholder="Contanos qué esperás que haga la persona"></textarea>
-    </div>
-    <div class="row-2">
-      <div class="field">
-        <label for="adultos_hogar">Adultos que viven en la casa</label>
-        <input type="text" id="adultos_hogar" name="adultos_hogar">
-      </div>
-      <div class="field">
-        <label>¿Hay mascotas?</label>
-        <div class="chip-group">
-          <label class="chip"><input type="radio" name="mascotas" value="si"><span>Sí</span></label>
-          <label class="chip"><input type="radio" name="mascotas" value="no"><span>No</span></label>
-        </div>
-      </div>
-    </div>
-    <div class="field">
-      <label>Modalidad de trabajo</label>
-      <div class="chip-group">
-        <label class="chip"><input type="radio" name="cama" value="afuera"><span>Sin cama adentro</span></label>
-        <label class="chip"><input type="radio" name="cama" value="adentro"><span>Con cama adentro</span></label>
-      </div>
-    </div>
-  </div>
-
-  <div class="form-block">
-    <div class="form-block-title">Un poco más de contexto</div>
-    <div class="field">
-      <label for="experiencia_previa">¿Ya tuviste personal doméstico antes? <span class="hint">(opcional)</span></label>
-      <textarea id="experiencia_previa" name="experiencia_previa" placeholder="Contanos cómo fue la experiencia, si querés"></textarea>
-    </div>
     <div class="field">
       <label for="como_te_enteraste">¿Cómo nos conociste?</label>
       <select id="como_te_enteraste" name="como_te_enteraste">
         <option value="">Elegí una opción</option>
+        <option value="anuncio">Un anuncio en redes</option>
         <option value="instagram">Instagram</option>
         <option value="google">Google</option>
         <option value="recomendacion">Recomendación</option>
         <option value="otro">Otro</option>
       </select>
     </div>
-    <div class="field">
-      <label for="referido">¿Te recomendó alguien? <span class="hint">(opcional)</span></label>
-      <input type="text" id="referido" name="referido" placeholder="Nombre de la familia socia o embajadora">
-    </div>
   </div>
+
+  <details class="mas-detalles" id="mas-detalles">
+    <summary>➕ Sumar más detalles <span class="hint">(opcional, nos ayuda a arrancar más rápido)</span></summary>
+    <div class="mas-detalles-body">
+      <div class="row-2">
+        <div class="field">
+          <label for="email">Email</label>
+          <input type="email" id="email" name="email">
+        </div>
+        <div class="field">
+          <label for="dni">DNI</label>
+          <input type="text" id="dni" name="dni" inputmode="numeric">
+        </div>
+      </div>
+      <div class="field">
+        <label for="domicilio">Domicilio</label>
+        <input type="text" id="domicilio" name="domicilio" placeholder="Calle, altura, barrio">
+      </div>
+      <div class="field">
+        <label for="dias_horario">Días y horario que necesitás</label>
+        <input type="text" id="dias_horario" name="dias_horario" placeholder="Ej: Lunes a viernes, 8 a 13hs">
+      </div>
+      <div class="field">
+        <label for="tareas">Tareas o detalle específico</label>
+        <textarea id="tareas" name="tareas" placeholder="Contanos qué esperás que haga la persona"></textarea>
+      </div>
+      <div class="row-2">
+        <div class="field">
+          <label for="adultos_hogar">Adultos que viven en la casa</label>
+          <input type="text" id="adultos_hogar" name="adultos_hogar">
+        </div>
+        <div class="field">
+          <label>¿Hay mascotas?</label>
+          <div class="chip-group">
+            <label class="chip"><input type="radio" name="mascotas" value="si"><span>Sí</span></label>
+            <label class="chip"><input type="radio" name="mascotas" value="no"><span>No</span></label>
+          </div>
+        </div>
+      </div>
+      <div class="field">
+        <label>Modalidad de trabajo</label>
+        <div class="chip-group">
+          <label class="chip"><input type="radio" name="cama" value="afuera"><span>Sin cama adentro</span></label>
+          <label class="chip"><input type="radio" name="cama" value="adentro"><span>Con cama adentro</span></label>
+        </div>
+      </div>
+      <div class="field">
+        <label for="experiencia_previa">¿Ya tuviste personal doméstico antes?</label>
+        <textarea id="experiencia_previa" name="experiencia_previa" placeholder="Contanos cómo fue la experiencia, si querés"></textarea>
+      </div>
+      <div class="field">
+        <label for="referido">¿Te recomendó alguien?</label>
+        <input type="text" id="referido" name="referido" placeholder="Nombre de la familia socia o embajadora">
+      </div>
+    </div>
+  </details>
 
   <div class="field">
     <div class="check-row">
@@ -349,6 +354,10 @@ const refPre = params.get('ref');
 if (refPre) {
   document.getElementById('referido').value = refPre;
   document.getElementById('como_te_enteraste').value = 'recomendacion';
+  document.getElementById('mas-detalles').open = true;
+} else if (params.get('fbclid') || params.get('utm_source') === 'meta') {
+  // Llega desde un anuncio de Meta: se marca solo el origen
+  document.getElementById('como_te_enteraste').value = 'anuncio';
 }
 
 // Preseleccionar servicio si viene por parámetro (?servicio=ninera / personal_casas / acompanante)
