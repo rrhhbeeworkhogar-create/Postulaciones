@@ -58,6 +58,25 @@ section{padding:48px 0;}
 h2{font-size:26px;font-weight:600;color:var(--cafe);letter-spacing:-0.3px;margin-bottom:16px;}
 .section-sub{font-size:15px;color:var(--text-dim);max-width:600px;margin-bottom:32px;}
 
+
+/* PLANES */
+.planes-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:22px;align-items:stretch;}
+.plan-card{background:var(--card);border:1px solid var(--line);border-radius:22px;padding:34px 30px;display:flex;flex-direction:column;gap:14px;position:relative;}
+.plan-card.premium{border:2px solid var(--terracota);box-shadow:0 14px 34px rgba(193,100,47,0.14);}
+.plan-tag{position:absolute;top:-13px;left:30px;background:var(--terracota);color:#FFFDF8;font-size:11.5px;font-weight:700;letter-spacing:1.2px;text-transform:uppercase;padding:5px 14px;border-radius:999px;}
+.plan-card h3{font-size:21px;font-weight:600;color:var(--cafe);}
+.plan-price{font-size:40px;font-weight:700;color:var(--terracota);line-height:1.1;}
+.plan-price small{font-size:15px;font-weight:500;color:var(--text-dim);}
+.plan-desc{font-size:14px;color:var(--text-dim);}
+.plan-list{display:flex;flex-direction:column;gap:11px;margin:4px 0 10px;}
+.plan-list .pi{display:flex;gap:10px;align-items:flex-start;font-size:14px;color:var(--text);}
+.plan-list .pi svg{width:17px;height:17px;flex-shrink:0;margin-top:3px;color:var(--terracota);}
+.plan-list .pi.extra{font-weight:600;color:var(--cafe);}
+.plan-list .pi.no{color:var(--text-dim);}
+.plan-list .pi.no svg{color:var(--musgo);opacity:.6;}
+.plan-card .btn-primary,.plan-card .btn-secondary{justify-content:center;margin-top:auto;}
+.plan-nota{font-size:13px;color:var(--text-dim);text-align:center;max-width:640px;margin:26px auto 0;}
+
 /* QUE INCLUYE */
 .incluye-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:18px;}
 .incluye-card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:24px 22px;}
@@ -129,6 +148,8 @@ footer p{color:var(--arena-osc);font-size:13px;margin-bottom:4px;opacity:0.85;}
 @media (max-width:720px){
 .incluye-grid{grid-template-columns:1fr;}
 .turnos-grid{grid-template-columns:1fr;}
+.planes-grid{grid-template-columns:1fr;}
+.plan-card{padding:30px 22px;}
 .fijo-compare{grid-template-columns:1fr;}
 .cobro-row{flex-direction:column;gap:8px;}
 .final-cta{padding:36px 22px;}
@@ -174,11 +195,58 @@ src="https://www.facebook.com/tr?id=1412505504222087&ev=PageView&noscript=1"
 <div class="badge-hero">🎉 Probala por $10.000: incluye 1 turno, sin comisión de gestión</div>
 <h1>La membresía que te da acceso<br>a ayuda verificada, cuando la necesites</h1>
 <p class="lead">Una cuota mensual te abre la puerta a nuestra red de trabajadoras evaluadas para cubrir lo puntual — sin tener que armar una búsqueda desde cero cada vez.</p>
-<div class="price-tag">$10.000 <small>/ 30 días</small></div>
+<div class="price-tag"><small>Desde</small> $10.000 <small>/ 30 días</small></div>
 <div class="cta-row">
-<a class="btn-primary" href="familia-form.html?modalidad=membresia">Sumarme a la membresía</a>
+<a class="btn-primary" href="#planes">Elegir mi membresía</a>
 <a href="#como-se-cobra" class="btn-secondary">Ver cómo se cobra</a>
 </div>
+</div>
+</section>
+
+
+<!-- PLANES -->
+<section id="planes" style="padding-top:8px;">
+<div class="wrap">
+<div class="section-title">Elegí tu membresía</div>
+<h2>Dos niveles de verificación, el mismo servicio</h2>
+<p class="section-sub">Las dos incluyen 1 turno y ninguna cobra comisión de gestión. Lo que cambia es cuánto revisamos a la persona antes de presentártela.</p>
+<div class="planes-grid">
+
+<div class="plan-card">
+<h3>Membresía</h3>
+<div class="plan-price">$10.000 <small>/ 30 días</small></div>
+<p class="plan-desc">Personal verificado, para resolver lo puntual con tranquilidad.</p>
+<div class="plan-list">
+<div class="pi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 13l4 4L19 7"/></svg> Entrevista con nuestro equipo</div>
+<div class="pi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 13l4 4L19 7"/></svg> Test psicotécnico</div>
+<div class="pi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 13l4 4L19 7"/></svg> Referencias verificadas</div>
+<div class="pi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 13l4 4L19 7"/></svg> Certificado de antecedentes</div>
+<div class="pi no"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M6 6l12 12M18 6L6 18"/></svg> Sin entrevista con psicóloga</div>
+<div class="pi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 13l4 4L19 7"/></svg> 1 turno de hasta 8 hs incluido, sin comisión de gestión</div>
+<div class="pi extra"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 13l4 4L19 7"/></svg> Turno extra: $10.000</div>
+</div>
+<a class="btn-secondary" href="familia-form.html?modalidad=membresia">Sumarme a la Membresía</a>
+</div>
+
+<div class="plan-card premium">
+<span class="plan-tag">Máxima verificación</span>
+<h3>Membresía Premium</h3>
+<div class="plan-price">$20.000 <small>/ 30 días</small></div>
+<p class="plan-desc">Todo lo de la Membresía, y además la persona pasó por una psicóloga.</p>
+<div class="plan-list">
+<div class="pi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 13l4 4L19 7"/></svg> Entrevista con nuestro equipo</div>
+<div class="pi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 13l4 4L19 7"/></svg> Test psicotécnico</div>
+<div class="pi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 13l4 4L19 7"/></svg> Referencias verificadas</div>
+<div class="pi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 13l4 4L19 7"/></svg> Certificado de antecedentes</div>
+<div class="pi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 13l4 4L19 7"/></svg> <strong>Entrevista con psicóloga</strong></div>
+<div class="pi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 13l4 4L19 7"/></svg> 1 turno de hasta 8 hs incluido, sin comisión de gestión</div>
+<div class="pi extra"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 13l4 4L19 7"/></svg> Turno extra: $10.000</div>
+</div>
+<a class="btn-primary" href="familia-form.html?modalidad=membresia_premium">Sumarme a la Premium</a>
+</div>
+
+</div>
+<p class="plan-nota">En las dos, la trabajadora te cobra aparte el valor de su turno, directo a ella. Si ya tenés la Membresía y querés pasarte a la Premium, escribinos y lo coordinamos.</p>
 </div>
 </section>
 
@@ -222,8 +290,8 @@ src="https://www.facebook.com/tr?id=1412505504222087&ev=PageView&noscript=1"
 <div class="cobro-row">
 <div class="cobro-num">1</div>
 <div class="cobro-body">
-<h3>Membresía — <span class="cobro-monto">$10.000</span></h3>
-<p>Incluye 1 turno de hasta 8 horas, sin comisión de gestión. Vale por 30 días desde el pago.</p>
+<h3>Membresía — <span class="cobro-monto">$10.000</span> · Premium — <span class="cobro-monto">$20.000</span></h3>
+<p>Las dos incluyen 1 turno de hasta 8 horas, sin comisión de gestión. Valen por 30 días desde el pago. La Premium suma la entrevista con psicóloga.</p>
 </div>
 </div>
 <div class="cobro-row">
@@ -237,7 +305,7 @@ src="https://www.facebook.com/tr?id=1412505504222087&ev=PageView&noscript=1"
 <div class="cobro-num">3</div>
 <div class="cobro-body">
 <h3>Turnos extra — <span class="cobro-monto">solo si los necesitás</span></h3>
-<p>Si ya usaste tu turno incluido y necesitás más, cada turno extra cuesta $10.000.</p>
+<p>Si ya usaste tu turno incluido y necesitás más, cada turno extra cuesta $10.000, en cualquiera de las dos membresías.</p>
 </div>
 </div>
 </div>
@@ -301,6 +369,10 @@ src="https://www.facebook.com/tr?id=1412505504222087&ev=PageView&noscript=1"
 <div class="wrap">
 <div class="section-title">Preguntas frecuentes</div>
 <h2>Lo que más nos preguntan</h2>
+<div class="faq-item">
+<h3>¿Qué diferencia hay entre la Membresía y la Premium?</h3>
+<p>En las dos revisamos a la persona con entrevista, test psicotécnico, referencias y certificado de antecedentes. En la Premium, además, la trabajadora pasó por una entrevista con una psicóloga. El resto es igual: 1 turno incluido, sin comisión y turno extra a $10.000.</p>
+</div>
 <div class="faq-item">
 <h3>¿Qué pasa si no uso mi turno?</h3>
 <p>El turno incluido vale por 30 días desde tu pago y no se acumula para el período siguiente. Te recomendamos usarlo en tu primer período para conocer cómo funciona el servicio.</p>
