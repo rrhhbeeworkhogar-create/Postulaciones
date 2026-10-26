@@ -211,7 +211,8 @@ src="https://www.facebook.com/tr?id=1412505504222087&ev=PageView&noscript=1"
       <label>Modalidad *</label>
       <div class="chip-group" id="grupo-modalidad">
         <label class="chip"><input type="radio" name="modalidad" value="permanente" required><span>Búsqueda permanente</span></label>
-        <label class="chip"><input type="radio" name="modalidad" value="membresia"><span>Membresía (turnos eventuales)</span></label>
+        <label class="chip"><input type="radio" name="modalidad" value="membresia"><span>Membresía $10.000 (turnos eventuales)</span></label>
+        <label class="chip"><input type="radio" name="modalidad" value="membresia_premium"><span>Membresía Premium $20.000 (con psicóloga)</span></label>
       </div>
     </div>
 
@@ -390,7 +391,7 @@ form.addEventListener('submit', function(e){
   .then(r => r.json())
   .then(res => {
     if (res.ok) {
-      const msg = encodeURIComponent(`Hola! Soy ${data.nombre}, acabo de completar el formulario de BeeWork Hogar (${data.modalidad === 'membresia' ? 'membresía' : 'búsqueda permanente'}).`);
+      const msg = encodeURIComponent(`Hola! Soy ${data.nombre}, acabo de completar el formulario de BeeWork Hogar (${data.modalidad === 'membresia_premium' ? 'membresía Premium' : data.modalidad === 'membresia' ? 'membresía' : 'búsqueda permanente'}).`);
       document.getElementById('wa-success').href = `https://wa.me/${NUMERO_WHATSAPP}?text=${msg}`;
       form.style.display = 'none';
       document.getElementById('success').style.display = 'block';
